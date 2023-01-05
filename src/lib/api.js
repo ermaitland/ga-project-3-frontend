@@ -2,7 +2,8 @@ import axios from 'axios';
 import { AUTH } from './auth';
 
 const ENDPOINTS = {
-  getAllProducts: '/api/products'
+  getAllProducts: '/api/products',
+  getSingleProduct: (id) => `/api/products/${id}`
 };
 
 const getHeaders = () => ({
