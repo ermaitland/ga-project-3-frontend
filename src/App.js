@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import GetAllBrands from './components/GetAllBrands';
 
 import './styles/App.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,6 +16,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/brands' element={<GetAllBrands />} />
       </Routes>
       <ToastContainer></ToastContainer>
     </Router>

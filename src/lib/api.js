@@ -2,7 +2,9 @@ import axios from 'axios';
 import { AUTH } from './auth';
 
 const ENDPOINTS = {
-  getAllProducts: '/api/products'
+  getAllProducts: '/api/products',
+  allBrands: '/api/brands',
+  AllProductsfForBrand: '/api/brands/:id/products'
 };
 
 const getHeaders = () => ({
