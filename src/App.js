@@ -5,6 +5,8 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
+import Login from './components/Login';
+import Register from './components/Register';
 import GetAllBrands from './components/GetAllBrands';
 
 import './styles/App.css';
@@ -20,6 +22,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/users' element={<UserIndex />} />
+        <Route path='/profile/:userId' element={<User />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/brands' element={<GetAllBrands />} />
         <Route path='/users' element={<UserIndex />} />
         <Route path='/profile/:userId' element={<User />} />
