@@ -3,6 +3,7 @@ import { AUTH } from './auth';
 
 const ENDPOINTS = {
   getAllProducts: '/api/products',
+  getSingleProduct: (id) => `/api/products/${id}`,
   login: '/api/login',
   register: '/api/register',
   cloudinary: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
