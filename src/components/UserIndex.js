@@ -2,7 +2,6 @@ import { Grid } from '@mui/material';
 import { Container } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
-import ProfilePicture from './common/ProfilePicture';
 import UserCard from './common/UserCard';
 
 export default function UserIndex() {
