@@ -45,15 +45,18 @@ export default function User() {
           {singleUser?.user.reviews && (
             <Box>
               {singleUser?.user.reviews.map((review) => (
-                <ReviewCard
-                  key={review._id}
-                  text={review.text}
-                  reviewer={review.reviewer}
-                  productId={id}
-                  reviewId={review._id}
-                  rating={review.rating}
-                  setIsUpdated={setIsUpdated}
-                />
+                <Typography>
+                  {review.productId}
+                  <ReviewCard
+                    key={review._id}
+                    text={review.text}
+                    reviewer={review.reviewer}
+                    productId={id}
+                    reviewId={review._id}
+                    rating={review.rating}
+                    setIsUpdated={setIsUpdated}
+                  />
+                </Typography>
               ))}
             </Box>
           )}

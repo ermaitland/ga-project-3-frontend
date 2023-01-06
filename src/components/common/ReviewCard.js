@@ -90,7 +90,7 @@ export default function ReviewCard({
         )}
         <Rating />
       </CardContent>
-      {AUTH.getPayload().isAdmin && (
+      {(AUTH.getPayload().isAdmin || AUTH.isOwner(reviewer._id)) && (
         <CardActions>
           <Button size='small' onClick={toggleEditMode}>
             {isEditMode ? 'CANCEL' : 'Edit Review'}
