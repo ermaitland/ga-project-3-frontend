@@ -3,11 +3,14 @@ import { AUTH } from './auth';
 
 const ENDPOINTS = {
   getAllProducts: '/api/products',
+  getAllUsers: '/api/users',
+  allBrands: '/api/brands',
+  AllProductsfForBrand: '/api/brands/:id/products',
   getSingleProduct: (id) => `/api/products/${id}`,
   login: '/api/login',
   register: '/api/register',
   cloudinary: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
-  getAllUsers: '/api/users'
+  singleUser: (userId) => `/api/profile/${userId}`
 };
 
 const getHeaders = () => ({
