@@ -4,10 +4,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Container } from '@mui/system';
 import ProfilePicture from './common/ProfilePicture';
 import { Button, CardContent, Typography } from '@mui/material';
-import { useAuthenticated } from '../hook/useAuthenticated';
+import ReviewCard from './common/ReviewCard';
 
 export default function User() {
-  const [isLoggedIn] = useAuthenticated();
+  const { id } = useParams();
   const { userId } = useParams();
   const [singleUser, setSingleUser] = useState(null);
   const [isUpdated, setIsUpdated] = useState(false);
@@ -42,7 +42,21 @@ export default function User() {
       <Box>
         <CardContent>
           <Typography>{singleUser?.user.username}</Typography>
-          {isLoggedIn && <Typography>{singleUser?.user.reviews}</Typography>}
+          {singleUser?.user.reviews && (
+            <Box>
+              {singleUser?.user.reviews.map((review) => (
+                <ReviewCard
+                  key={review._id}
+                  text={review.text}
+                  reviewer={review.reviewer}
+                  productId={id}
+                  reviewId={review._id}
+                  rating={review.rating}
+                  setIsUpdated={setIsUpdated}
+                />
+              ))}
+            </Box>
+          )}
         </CardContent>
         <Button onClick={goBackToProducts}>Back to Browsing!</Button>
       </Box>
