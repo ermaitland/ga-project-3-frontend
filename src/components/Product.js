@@ -62,7 +62,7 @@ export default function Product() {
           <Typography color='text.primary' sx={{ fontSize: 18 }} gutterBottom>
             Decription: {singleProduct.description}
           </Typography>
-          <ProductRating rating={Product.rating || 0} />
+          <ProductRating rating={singleProduct.rating || 0} />
         </CardContent>
       </Container>
     </>
