@@ -30,7 +30,8 @@ export default function Product() {
       .catch(({ message, response }) => {
         console.error(message, response);
       });
-  }, [id]);
+    setIsUpdated(false);
+  }, [id, isUpdated]);
 
   if (singleProduct === null) {
     return <p>Data is Loading</p>;

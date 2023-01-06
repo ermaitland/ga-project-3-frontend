@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductRating from './ProductRating';
 import { AUTH } from '../../lib/auth';
 import { API } from '../../lib/api';
@@ -23,10 +23,17 @@ export default function ReviewCard({
   const [isEditMode, setIsEditMode] = useState(false);
   const [reviewText, setReviewText] = useState(text);
   const [reviewRating, setReviewRating] = useState(rating);
+  // const [user, setUser] = useState('');
 
   const toggleEditMode = () => setIsEditMode(!isEditMode);
 
   const handleReviewTextChange = (e) => setReviewText(e.target.value);
+
+  // useEffect(() => {
+  //   API.POST(API.ENDPOINTS.singleUser({ reviewer }), {}, API.getHeaders())
+  //     .then(({ data }) => setUser(data))
+  //     .catch((e) => console.log(e));
+  // }, [reviewer]);
 
   const saveChanges = () => {
     if (text !== reviewText || rating !== reviewRating) {
@@ -44,7 +51,10 @@ export default function ReviewCard({
   };
 
   const deleteReview = () =>
-    API.DELETE(API.ENDPOINTS.singleReview(productId, reviewId).API.getHeaders())
+    API.DELETE(
+      API.ENDPOINTS.singleReview(productId, reviewId),
+      API.getHeaders()
+    )
       .then(() => setIsUpdated(true))
       .catch((e) => console.log(e));
 
@@ -52,11 +62,11 @@ export default function ReviewCard({
     isEditMode ? (
       <ProductRating
         rating={reviewRating}
-        size={20}
+        size={30}
         setRating={setReviewRating}
       />
     ) : (
-      <ProductRating rating={rating} size={20} />
+      <ProductRating rating={rating} size={30} />
     );
 
   return (
@@ -80,14 +90,19 @@ export default function ReviewCard({
         )}
         <Rating />
       </CardContent>
-      <CardActions>
-        <Button size='small' onClick={toggleEditMode}>
-          {isEditMode ? 'CANCEL' : 'Edit Review'}
-        </Button>
-        <Button size='small' onClick={isEditMode ? saveChanges : deleteReview}>
-          {isEditMode ? 'SAVE' : 'Delete Review'}
-        </Button>
-      </CardActions>
+      {AUTH.getPayload().isAdmin && (
+        <CardActions>
+          <Button size='small' onClick={toggleEditMode}>
+            {isEditMode ? 'CANCEL' : 'Edit Review'}
+          </Button>
+          <Button
+            size='small'
+            onClick={isEditMode ? saveChanges : deleteReview}
+          >
+            {isEditMode ? 'SAVE' : 'Delete Review'}
+          </Button>
+        </CardActions>
+      )}
     </Card>
   );
 }

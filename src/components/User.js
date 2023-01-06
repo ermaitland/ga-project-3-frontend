@@ -4,11 +4,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Container } from '@mui/system';
 import ProfilePicture from './common/ProfilePicture';
 import { Button, CardContent, Typography } from '@mui/material';
-import { useAuthenticated } from '../hook/useAuthenticated';
 import ReviewCard from './common/ReviewCard';
 
 export default function User() {
-  const [isLoggedIn] = useAuthenticated();
   const { id } = useParams();
   const { userId } = useParams();
   const [singleUser, setSingleUser] = useState(null);
