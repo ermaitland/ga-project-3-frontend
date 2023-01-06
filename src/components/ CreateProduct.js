@@ -47,14 +47,15 @@ export default function CreateProduct() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = formData.brand
-      ? formData
-      : {
-          name: formData.name,
-          description: formData.description,
-          // type: formData.type,
-          image: formData.image
-        };
+    const data =
+      formData.brand && formData.category
+        ? formData
+        : {
+            name: formData.name,
+            description: formData.description,
+            // type: formData.type,
+            image: formData.image
+          };
 
     API.POST(API.ENDPOINTS.getAllProducts, data, API.getHeaders())
       .then(({ data }) => {
