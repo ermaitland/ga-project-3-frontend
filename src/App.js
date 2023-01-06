@@ -3,6 +3,8 @@ import { ToastContainer } from 'react-toastify';
 
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import ProductsIndex from './components/ProductsIndex';
+import Product from './components/Product';
 import Login from './components/Login';
 import Register from './components/Register';
 import GetAllBrands from './components/GetAllBrands';
@@ -17,9 +19,11 @@ window.Buffer = window.Buffer || require('buffer').Buffer;
 function App() {
   return (
     <Router>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/products' element={<ProductsIndex />} />
+        <Route path='/products/:id' element={<Product />} />
         <Route path='/profile/:userId' element={<User />} />
         <Route path='/users' element={<UserIndex />} />
         <Route path='/brands' element={<GetAllBrands />} />

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { AUTH } from '../lib/auth';
-// import { useAuthenticated } from '../hook/useAuthenticated';
+import { useAuthenticated } from '../hook/useAuthenticated';
 import { Container } from '@mui/system';
 import { Button, TextField } from '@mui/material';
 
@@ -10,28 +10,28 @@ export default function Login() {
   const navigate = useNavigate();
   const [formFields, setFormFields] = useState({ email: '', password: '' });
   const [error, setError] = useState({ email: false, password: false });
-  // const [isLoggedIn] = useAuthenticated();
+  const [isLoggedIn] = useAuthenticated();
 
-  // if(isLoggedIn){
-  //   navigate('/')
-  // }
+  if (isLoggedIn) {
+    navigate('/products');
+  }
+
+  const handleChange = (e) => {
+    setFormFields({ ...formFields, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     API.POST(API.ENDPOINTS.login, formFields)
       .then(({ data }) => {
+        console.log(data.token);
         AUTH.setToken(data.token);
-        navigate('/');
-        // navigate to the products page
+        navigate('/products');
       })
       .catch((e) => {
         console.log(e);
         setError({ email: true, password: true });
       });
-  };
-
-  const handleChange = (e) => {
-    setFormFields({ ...formFields, [e.target.name]: e.target.value });
   };
 
   return (

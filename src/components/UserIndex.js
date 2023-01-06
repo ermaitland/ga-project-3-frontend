@@ -2,7 +2,6 @@ import { Grid } from '@mui/material';
 import { Container } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
-import ProfilePicture from './common/ProfilePicture';
 import UserCard from './common/UserCard';
 
 export default function UserIndex() {
@@ -10,7 +9,10 @@ export default function UserIndex() {
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.getAllUsers)
-      .then(({ data }) => setUsers(data))
+      .then(({ data }) => {
+        setUsers(data);
+        console.log(data);
+      })
       .catch(({ message, responce }) => {
         console.log(message, responce);
       });
@@ -26,7 +28,8 @@ export default function UserIndex() {
               name={user.username}
               reviews={user.reviews.length}
               imageId={user.cloudinaryImageId}
-            ></UserCard>
+              userId={user._id}
+            />
           </Grid>
         ))}
       </Grid>
