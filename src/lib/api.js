@@ -10,7 +10,8 @@ const ENDPOINTS = {
   login: '/api/login',
   register: '/api/register',
   cloudinary: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
-  singleUser: (userId) => `/api/profile/${userId}`
+  singleUser: (userId) => `/api/profile/${userId}`,
+  createReview: (id) => `/api/products/${id}/reviews`
 };
 
 const getHeaders = () => ({

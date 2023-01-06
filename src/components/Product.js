@@ -44,6 +44,11 @@ export default function Product() {
         <Box>
           <img src={singleProduct.image} alt={singleProduct.name} />
         </Box>
+        <CardActions>
+          <Link to={`/products/${singleProduct?._id}/reviews`}>
+            <Button size='small'>Create a Review</Button>
+          </Link>
+        </CardActions>
         <CardContent>
           <Typography variant='h5' component='p'>
             {singleProduct.name}
