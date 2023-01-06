@@ -3,6 +3,7 @@ import { AUTH } from './auth';
 
 const ENDPOINTS = {
   getAllProducts: '/api/products',
+  getAllCategories: '/api/categories',
   getAllUsers: '/api/users',
   allBrands: '/api/brands',
   AllProductsfForBrand: '/api/brands/:id/products',
