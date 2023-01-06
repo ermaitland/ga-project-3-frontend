@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
+import { Link } from 'react-router-dom';
 
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import {
+  CardActionArea,
+  Card,
+  CardContent,
+  CardMedia,
+  Button
+} from '@mui/material';
 
 export default function GetAllBrandsIndex() {
   const [brands, setBrands] = useState(null);
@@ -24,40 +27,42 @@ export default function GetAllBrandsIndex() {
   console.log('hello');
 
   return (
-    <>
+    <CardContent>
       <div>
         {!brands ? (
           <p>null</p>
         ) : (
           <>
-            {brands.map((brand) => (
-              <>
+            {brands?.map((brand) => (
+              <Link to={`/brands/${brand._id}/products`}>
                 <Card sx={{ maxWidth: 345 }}>
                   <CardActionArea>
                     <CardMedia
                       component='img'
                       height='140'
                       alt='vegan food iamge'
-                      image={brand.image}
+                      image={brand?.image}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant='h5' component='div'>
-                        {brand.name}
-                      </Typography>
-                      <Typography variant='body2' color='text.secondary'>
-                        {brand.products.map((product) => (
-                          <p>{product}</p>
-                        ))}
-                      </Typography>
+                      <Button gutterBottom variant='h5' component='div'>
+                        {brand?.name}
+                      </Button>
                     </CardContent>
                   </CardActionArea>
                 </Card>
-              </>
+              </Link>
             ))}
-            {/* <p>{brands[0].products[0]}</p> */}
           </>
         )}
       </div>
-    </>
+    </CardContent>
   );
 }
+
+// {
+//   /* {brand.products.map((product) => (
+// <p>{product}</p> */
+// }
+// {
+//   /* ))} */
+// }

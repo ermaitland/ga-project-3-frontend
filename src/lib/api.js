@@ -5,7 +5,7 @@ const ENDPOINTS = {
   getAllProducts: '/api/products',
   getAllUsers: '/api/users',
   allBrands: '/api/brands',
-  AllProductsfForBrand: '/api/brands/:id/products',
+  allProductsfForBrand: (id) => `/api/brands/${id}/products`,
   getSingleProduct: (id) => `/api/products/${id}`,
   login: '/api/login',
   register: '/api/register',
