@@ -102,17 +102,6 @@ export default function CreateProduct() {
               name='description'
             />
           </Box>
-          {/* <Box sx={{ mb: 2 }}>
-          <TextField
-          size='small'
-          type='text'
-          value={formData.type}
-          onChange={handleChange}
-          error={error}
-          label='Type'
-          name='type'
-          />
-        </Box> */}
           <Box sx={{ mb: 2 }}>
             <TextField
               size='small'
