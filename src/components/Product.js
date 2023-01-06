@@ -44,6 +44,11 @@ export default function Product() {
         <Box>
           <img src={singleProduct.image} alt={singleProduct.name} />
         </Box>
+        <CardActions>
+          <Link to={`/products/${singleProduct?._id}/reviews`}>
+            <Button size='small'>Create a Review</Button>
+          </Link>
+        </CardActions>
         <CardContent>
           <Typography variant='h5' component='p'>
             {singleProduct.name}
@@ -57,7 +62,7 @@ export default function Product() {
           <Typography color='text.primary' sx={{ fontSize: 18 }} gutterBottom>
             Decription: {singleProduct.description}
           </Typography>
-          <ProductRating rating={Product.rating || 0} />
+          <ProductRating rating={singleProduct.rating || 0} />
         </CardContent>
       </Container>
     </>
