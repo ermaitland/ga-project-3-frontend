@@ -28,7 +28,8 @@ export default function ProductsIndex() {
             <ProductCard
               name={product.name}
               image={product.image}
-              brand={product.brand}
+              brand={product.brand.name}
+              category={product.category.name}
               id={product._id}
             />
           </Grid>
