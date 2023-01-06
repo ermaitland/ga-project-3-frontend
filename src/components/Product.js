@@ -13,10 +13,11 @@ import {
 } from '@mui/material';
 
 import '../styles/Product.scss';
+import ReviewCard from './common/ReviewCard';
 
 export default function Product() {
   // const navigate = useNavigate();
-
+  const [isUpdated, setIsUpdated] = useState(false);
   const { id } = useParams();
   const [singleProduct, setSingleProduct] = useState(null);
 
@@ -65,6 +66,23 @@ export default function Product() {
           <ProductRating rating={singleProduct.rating || 0} />
         </CardContent>
       </Container>
+      {!!singleProduct?.reviews.length && (
+        <Container maxWidth='lg'>
+          <Box>
+            {singleProduct?.reviews.map((review) => (
+              <ReviewCard
+                key={review._id}
+                text={review.text}
+                reviewer={review.reviewer}
+                productId={id}
+                reviewId={review._id}
+                rating={review.rating}
+                setIsUpdated={setIsUpdated}
+              />
+            ))}
+          </Box>
+        </Container>
+      )}
     </>
   );
 }
