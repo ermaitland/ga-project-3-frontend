@@ -134,7 +134,7 @@ export default function CreateProduct() {
                 name='brand'
                 onChange={handleChange}
               >
-                <MenuItem value=''>None</MenuItem>
+                {/* <MenuItem value=''>Other</MenuItem> */}
                 {availableBrands.map((brand) => (
                   <MenuItem key={brand._id} value={brand._id}>
                     {brand.name}
@@ -154,7 +154,7 @@ export default function CreateProduct() {
                 name='category'
                 onChange={handleChange}
               >
-                <MenuItem value=''>None</MenuItem>
+                {/* <MenuItem value=''>Other</MenuItem> */}
                 {availableCategories.map((category) => (
                   <MenuItem key={category._id} value={category._id}>
                     {category.name}
