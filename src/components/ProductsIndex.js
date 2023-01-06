@@ -21,19 +21,16 @@ export default function ProductsIndex() {
   if (products === null) {
     return <p>Loading</p>;
   }
-
-  console.log('PRODUCT BRAND NAME', products[0].brand.name);
-
   return (
     <Container maxwith='lg'>
       <Grid container spacing={2}>
-        {products?.map((product) => (
-          <Grid items xs={4} key={product._id} sx={{ mb: 2 }}>
+        {products.map((product) => (
+          <Grid items xs={4} key={product._id}>
             <ProductCard
               name={product.name}
               image={product.image}
-              // brand={product.brand.name}
-              // category={product.category.name}
+              brand={product.brand.name}
+              category={product.category.name}
               id={product._id}
               rating={product.rating || 0}
             />
