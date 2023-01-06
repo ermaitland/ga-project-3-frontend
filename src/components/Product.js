@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { API } from '../lib/api';
 
+import ProductRating from './common/ProductRating';
 import {
   Container,
   Box,
@@ -12,10 +13,11 @@ import {
 } from '@mui/material';
 
 import '../styles/Product.scss';
+import ReviewCard from './common/ReviewCard';
 
 export default function Product() {
   // const navigate = useNavigate();
-
+  const [isUpdated, setIsUpdated] = useState(false);
   const { id } = useParams();
   const [singleProduct, setSingleProduct] = useState(null);
 
@@ -28,7 +30,8 @@ export default function Product() {
       .catch(({ message, response }) => {
         console.error(message, response);
       });
-  }, [id]);
+    setIsUpdated(false);
+  }, [id, isUpdated]);
 
   if (singleProduct === null) {
     return <p>Data is Loading</p>;
@@ -38,13 +41,49 @@ export default function Product() {
     <>
       <div>
         <h1>this is the product page</h1>
-        <p>{singleProduct.name}</p>
       </div>
       <Container maxWidth='lg' sx={{ display: 'flex' }} className='Product'>
         <Box>
           <img src={singleProduct.image} alt={singleProduct.name} />
         </Box>
+        <CardActions>
+          <Link to={`/products/${singleProduct?._id}/reviews`}>
+            <Button size='small'>Create a Review</Button>
+          </Link>
+        </CardActions>
+        <CardContent>
+          <Typography variant='h5' component='p'>
+            {singleProduct.name}
+          </Typography>
+          <Typography color='text.secondary'>
+            Brand: {singleProduct.brand.name}
+          </Typography>
+          <Typography color='text.secondary'>
+            Category: {singleProduct.category.name}
+          </Typography>
+          <Typography color='text.primary' sx={{ fontSize: 18 }} gutterBottom>
+            Decription: {singleProduct.description}
+          </Typography>
+          <ProductRating rating={singleProduct.rating || 0} />
+        </CardContent>
       </Container>
+      {!!singleProduct?.reviews.length && (
+        <Container maxWidth='lg'>
+          <Box>
+            {singleProduct?.reviews.map((review) => (
+              <ReviewCard
+                key={review._id}
+                text={review.text}
+                reviewer={review.reviewer}
+                productId={id}
+                reviewId={review._id}
+                rating={review.rating}
+                setIsUpdated={setIsUpdated}
+              />
+            ))}
+          </Box>
+        </Container>
+      )}
     </>
   );
 }

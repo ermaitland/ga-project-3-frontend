@@ -14,21 +14,27 @@ import './styles/App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import UserIndex from './components/UserIndex';
 import User from './components/User';
+import CreateProduct from './components/ CreateProduct';
+import ReviewProduct from './components/ReviewProduct';
+import CreateCategory from './components/CreateCategory';
 
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
 function App() {
   return (
     <Router>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/products' element={<ProductsIndex />} />
+        <Route path='/products/create' element={<CreateProduct />} />
         <Route path='/products/:id' element={<Product />} />
+        <Route path='/products/:id/reviews' element={<ReviewProduct />} />
         <Route path='/brands/:id/products' element={<BrandProductList />} />
         <Route path='/profile/:userId' element={<User />} />
         <Route path='/users' element={<UserIndex />} />
         <Route path='/brands' element={<GetAllBrands />} />
+        <Route path='/categories/create' element={<CreateCategory />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
       </Routes>

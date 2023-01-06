@@ -1,11 +1,11 @@
-import { AppBar, Box, Toolbar, Typography, Link } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { AppBar, Box, Toolbar, Typography } from '@mui/material';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuthenticated } from '../hook/useAuthenticated';
 import { AUTH } from '../lib/auth';
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useAuthenticated;
+  const [isLoggedIn, setIsLoggedIn] = useAuthenticated();
 
   const logout = () => {
     AUTH.logout();
@@ -14,26 +14,80 @@ export default function Navbar() {
   };
 
   return (
-    <Box>
-      <AppBar>
-        <Toolbar>
-          <Link>
-            <Typography>Home</Typography>
+    <Box sx={{ flexgrow: 1 }}>
+      <AppBar position='static'>
+        <Toolbar variant='dense'>
+          <Link to='/'>
+            <Typography
+              variant='h6'
+              color='inherit'
+              component='div'
+              sx={{ mr: 2 }}
+            >
+              Home
+            </Typography>
           </Link>
-          <Link>
-            <Typography>Vegan Products</Typography>
+          <Link to='/products'>
+            <Typography
+              variant='h6'
+              color='inherit'
+              component='div'
+              sx={{ mr: 2 }}
+            >
+              Vegan Products
+            </Typography>
           </Link>
-          <Link>
-            <Typography>Vegan Brands</Typography>
+          <Link to='/brands'>
+            <Typography
+              variant='h6'
+              color='inherit'
+              component='div'
+              sx={{ mr: 2 }}
+            >
+              Vegan Brands
+            </Typography>
           </Link>
-          <Link>
-            <Typography>Register</Typography>
+          <Link to='/register'>
+            <Typography
+              variant='h6'
+              color='inherit'
+              component='div'
+              sx={{ mr: 2 }}
+            >
+              Register
+            </Typography>
           </Link>
-          <Link>
-            <Typography>Login</Typography>
+          <Link to='/login'>
+            <Typography
+              variant='h6'
+              color='inherit'
+              component='div'
+              sx={{ mr: 2 }}
+            >
+              Login
+            </Typography>
           </Link>
-          <Link>
-            <Typography>Logout</Typography>
+          {isLoggedIn && (
+            <Link to='/' onClick={logout}>
+              <Typography
+                variant='h6'
+                color='inherit'
+                component='div'
+                sx={{ mr: 2 }}
+              >
+                Logout
+              </Typography>
+            </Link>
+          )}
+          <Link to='/users'>
+            <Typography
+              variant='h6'
+              color='inherit'
+              component='div'
+              sx={{ mr: 2 }}
+            >
+              Users
+            </Typography>
           </Link>
         </Toolbar>
       </AppBar>

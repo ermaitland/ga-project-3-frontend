@@ -3,6 +3,7 @@ import { AUTH } from './auth';
 
 const ENDPOINTS = {
   getAllProducts: '/api/products',
+  getAllCategories: '/api/categories',
   getAllUsers: '/api/users',
   allBrands: '/api/brands',
   allProductsfForBrand: (id) => `/api/brands/${id}/products`,
@@ -10,7 +11,10 @@ const ENDPOINTS = {
   login: '/api/login',
   register: '/api/register',
   cloudinary: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
-  singleUser: (userId) => `/api/profile/${userId}`
+  singleUser: (userId) => `/api/profile/${userId}`,
+  createReview: (id) => `/api/products/${id}/reviews`,
+  singleReview: (productId, reviewId) =>
+    `/api/products/${productId}/reviews/${reviewId}`
 };
 
 const getHeaders = () => ({

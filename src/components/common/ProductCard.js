@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+import ProductRating from './ProductRating';
+
 import {
   Card,
   CardContent,
@@ -8,7 +10,14 @@ import {
   CardActionArea
 } from '@mui/material';
 
-export default function ProductCard({ name, image, brand, id }) {
+export default function ProductCard({
+  name,
+  image,
+  brand,
+  category,
+  rating,
+  id
+}) {
   const navigate = useNavigate();
   const navigateToProduct = () => navigate(`/products/${id}`);
 
@@ -28,7 +37,11 @@ export default function ProductCard({ name, image, brand, id }) {
           <Typography variant='body2' color='text.secondary'>
             {brand}
           </Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {category}
+          </Typography>
         </CardContent>
+        <ProductRating rating={rating} />
       </CardActionArea>
     </Card>
   );
