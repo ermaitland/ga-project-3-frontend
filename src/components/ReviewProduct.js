@@ -3,13 +3,13 @@ import { Box, Container } from '@mui/system';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { API } from '../lib/api';
-
-// add in the star component for rating and the rating values
+import ProductRating from './common/ProductRating';
 
 export default function ReviewProduct() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [textValue, setTextValue] = useState('');
+  const [rating, setRating] = useState(0);
 
   const handleTextChange = (e) => setTextValue(e.target.value);
 
@@ -17,7 +17,7 @@ export default function ReviewProduct() {
     e.preventDefault();
     API.POST(
       API.ENDPOINTS.createReview(id),
-      { text: textValue, rating: 1 },
+      { text: textValue, rating: rating },
       API.getHeaders()
     )
       .then(({ data }) => {
@@ -42,7 +42,9 @@ export default function ReviewProduct() {
             style={{ width: 500 }}
           />
         </Box>
-        <Box>{/* STAR RATING */}</Box>
+        <Box>
+          <ProductRating rating={rating} setRating={setRating} />{' '}
+        </Box>
         <Button type='Submit'>Send your review!</Button>
       </form>
     </Container>
