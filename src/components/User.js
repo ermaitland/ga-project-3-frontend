@@ -9,7 +9,7 @@ import { useAuthenticated } from '../hook/useAuthenticated';
 export default function User() {
   const [isLoggedIn] = useAuthenticated();
   const { userId } = useParams();
-  const [singleUser, setSingleUser] = useState('');
+  const [singleUser, setSingleUser] = useState(null);
   const [isUpdated, setIsUpdated] = useState(false);
   const navigate = useNavigate();
 
