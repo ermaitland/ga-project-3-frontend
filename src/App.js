@@ -8,6 +8,7 @@ import Product from './components/Product';
 import Login from './components/Login';
 import Register from './components/Register';
 import GetAllBrands from './components/GetAllBrands';
+import BrandProductList from './components/common/BrandProductList';
 
 import './styles/App.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -29,6 +30,7 @@ function App() {
         <Route path='/products/create' element={<CreateProduct />} />
         <Route path='/products/:id' element={<Product />} />
         <Route path='/products/:id/reviews' element={<ReviewProduct />} />
+        <Route path='/brands/:id/products' element={<BrandProductList />} />
         <Route path='/profile/:userId' element={<User />} />
         <Route path='/users' element={<UserIndex />} />
         <Route path='/brands' element={<GetAllBrands />} />
