@@ -13,6 +13,7 @@ import './styles/App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import UserIndex from './components/UserIndex';
 import User from './components/User';
+import CreateProduct from './components/ CreateProduct';
 
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/products' element={<ProductsIndex />} />
+        <Route path='/products/create' element={<CreateProduct />} />
         <Route path='/products/:id' element={<Product />} />
         <Route path='/profile/:userId' element={<User />} />
         <Route path='/users' element={<UserIndex />} />
