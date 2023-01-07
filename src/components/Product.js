@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { API } from '../lib/api';
+import { useAuthenticated } from '../hook/useAuthenticated';
 
 import ProductRating from './common/ProductRating';
 import {
@@ -18,8 +19,8 @@ import ReviewCard from './common/ReviewCard';
 export default function Product() {
   // const navigate = useNavigate();
   const [isUpdated, setIsUpdated] = useState(false);
-  const { id } = useParams();
   const [singleProduct, setSingleProduct] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.getSingleProduct(id))
@@ -37,6 +38,15 @@ export default function Product() {
     return <p>Data is Loading</p>;
   }
 
+  const numberOfReviews = singleProduct.reviews.length;
+  let isNumberOfReviewsNotOne;
+
+  if (numberOfReviews === 1) {
+    isNumberOfReviewsNotOne = false;
+  } else {
+    isNumberOfReviewsNotOne = true;
+  }
+
   return (
     <>
       <div>
@@ -46,11 +56,7 @@ export default function Product() {
         <Box>
           <img src={singleProduct.image} alt={singleProduct.name} />
         </Box>
-        <CardActions>
-          <Link to={`/products/${singleProduct?._id}/reviews`}>
-            <Button size='small'>Create a Review</Button>
-          </Link>
-        </CardActions>
+
         <CardContent>
           <Typography variant='h5' component='p'>
             {singleProduct.name}
@@ -64,7 +70,27 @@ export default function Product() {
           <Typography color='text.primary' sx={{ fontSize: 18 }} gutterBottom>
             Decription: {singleProduct.description}
           </Typography>
+
           <ProductRating rating={singleProduct.rating || 0} />
+          <Container>
+            <Typography color='text.primary'>
+              {singleProduct.rating} avg. Rating{' '}
+            </Typography>
+            <Container sx={{ display: 'flex' }}>
+              <Typography>{numberOfReviews}</Typography>
+
+              {isNumberOfReviewsNotOne ? (
+                <Typography> reviews</Typography>
+              ) : (
+                <Typography> review</Typography>
+              )}
+            </Container>
+          </Container>
+          <CardActions>
+            <Link to={`/products/${singleProduct?._id}/reviews`}>
+              <Button size='small'>Create a Review</Button>
+            </Link>
+          </CardActions>
         </CardContent>
       </Container>
       {!!singleProduct?.reviews.length && (
