@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { API } from '../lib/api';
 import { useAuthenticated } from '../hook/useAuthenticated';
@@ -15,12 +15,14 @@ import {
 
 import '../styles/Product.scss';
 import ReviewCard from './common/ReviewCard';
+import { AUTH } from '../lib/auth';
 
 export default function Product() {
   // const navigate = useNavigate();
   const [isUpdated, setIsUpdated] = useState(false);
   const [singleProduct, setSingleProduct] = useState(null);
   const { id } = useParams();
+  const [isLoggedIn] = useAuthenticated();
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.getSingleProduct(id))
@@ -34,18 +36,17 @@ export default function Product() {
     setIsUpdated(false);
   }, [id, isUpdated]);
 
+  const userHasReviewed = useMemo(() => {
+    return singleProduct?.reviews
+      .map((review) => review.reviewer._id)
+      .some((id) => AUTH.isOwner(id));
+  }, [singleProduct]);
+
   if (singleProduct === null) {
     return <p>Data is Loading</p>;
   }
-
   const numberOfReviews = singleProduct.reviews.length;
-  let isNumberOfReviewsNotOne;
-
-  if (numberOfReviews === 1) {
-    isNumberOfReviewsNotOne = false;
-  } else {
-    isNumberOfReviewsNotOne = true;
-  }
+  let isNumberOfReviewsOne = numberOfReviews === 1;
 
   return (
     <>
@@ -77,19 +78,41 @@ export default function Product() {
               {singleProduct.rating} avg. Rating{' '}
             </Typography>
             <Container sx={{ display: 'flex' }}>
-              <Typography>{numberOfReviews}</Typography>
-
-              {isNumberOfReviewsNotOne ? (
-                <Typography> reviews</Typography>
+              {isNumberOfReviewsOne ? (
+                <Typography>{numberOfReviews} review</Typography>
               ) : (
-                <Typography> review</Typography>
+                <Typography>{numberOfReviews} reviews</Typography>
               )}
             </Container>
           </Container>
+
+          {/* <CardActions>
+            {isLoggedIn ? (
+              !userHasReviewed ? (
+                <Link to={`/products/${singleProduct?._id}/reviews`}>
+                  <Button size='small'>Create a Review</Button>
+                </Link>
+              ) : (
+                <p>something</p>
+              )
+            ) : (
+              <Link to={`/login`}>
+                <Button size='small'>Login to create a Review</Button>
+              </Link>
+            )}
+          </CardActions> */}
           <CardActions>
-            <Link to={`/products/${singleProduct?._id}/reviews`}>
-              <Button size='small'>Create a Review</Button>
-            </Link>
+            {isLoggedIn && !userHasReviewed && (
+              <Link to={`/products/${singleProduct?._id}/reviews`}>
+                <Button size='small'>Create a Review</Button>
+              </Link>
+            )}
+
+            {!isLoggedIn && (
+              <Link to={`/login`}>
+                <Button size='small'>Login to create a Review</Button>
+              </Link>
+            )}
           </CardActions>
         </CardContent>
       </Container>
