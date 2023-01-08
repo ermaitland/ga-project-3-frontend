@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ProductRating from './ProductRating';
 import { AUTH } from '../../lib/auth';
 import { API } from '../../lib/api';
@@ -11,6 +11,7 @@ import {
   CardActions,
   Button
 } from '@mui/material';
+import { Box } from '@mui/system';
 
 export default function ReviewCard({
   text,
@@ -23,17 +24,10 @@ export default function ReviewCard({
   const [isEditMode, setIsEditMode] = useState(false);
   const [reviewText, setReviewText] = useState(text);
   const [reviewRating, setReviewRating] = useState(rating);
-  // const [user, setUser] = useState('');
 
   const toggleEditMode = () => setIsEditMode(!isEditMode);
 
   const handleReviewTextChange = (e) => setReviewText(e.target.value);
-
-  // useEffect(() => {
-  //   API.POST(API.ENDPOINTS.singleUser({ reviewer }), {}, API.getHeaders())
-  //     .then(({ data }) => setUser(data))
-  //     .catch((e) => console.log(e));
-  // }, [reviewer]);
 
   const saveChanges = () => {
     if (text !== reviewText || rating !== reviewRating) {
@@ -70,12 +64,26 @@ export default function ReviewCard({
     );
 
   return (
-    <Card>
+    <Card sx={{ minWidth: 275, mb: 2 }}>
       <CardContent>
-        {reviewer.cloudinaryImageId && (
-          <ProfilePicture imageId={reviewer.cloudinaryImageId} />
-        )}
-        {reviewer.username}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row-reverse',
+            justifyContent: 'space-between'
+          }}
+        >
+          <Box sx={{ alignSelf: 'flex-end' }}>
+            {reviewer.cloudinaryImageId && (
+              <ProfilePicture imageId={reviewer.cloudinaryImageId} />
+            )}
+          </Box>
+          <Box sx={{ alignSelf: 'flex-start' }}>
+            <Typography variant='h5' color='text.secondary'>
+              {reviewer.username}
+            </Typography>
+          </Box>
+        </Box>
         <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom />
         {isEditMode ? (
           <TextareaAutosize
@@ -92,9 +100,11 @@ export default function ReviewCard({
       </CardContent>
       {(AUTH.getPayload().isAdmin || AUTH.isOwner(reviewer._id)) && (
         <CardActions>
-          <Button size='small' onClick={toggleEditMode}>
-            {isEditMode ? 'CANCEL' : 'Edit Review'}
-          </Button>
+          {AUTH.isOwner(reviewer._id) && (
+            <Button size='small' onClick={toggleEditMode}>
+              {isEditMode ? 'CANCEL' : 'Edit Review'}
+            </Button>
+          )}
           <Button
             size='small'
             onClick={isEditMode ? saveChanges : deleteReview}

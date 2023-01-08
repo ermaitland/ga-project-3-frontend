@@ -68,27 +68,29 @@ export default function Navbar() {
             </Typography>
           </Link>
           {isLoggedIn && (
-            <Link to='/' onClick={logout}>
-              <Typography
-                variant='h6'
-                color='inherit'
-                component='div'
-                sx={{ mr: 2 }}
-              >
-                Logout
-              </Typography>
-            </Link>
+            <>
+              <Link to='/' onClick={logout}>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2 }}
+                >
+                  Logout
+                </Typography>
+              </Link>
+              <Link to='/users'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2 }}
+                >
+                  Users
+                </Typography>
+              </Link>
+            </>
           )}
-          <Link to='/users'>
-            <Typography
-              variant='h6'
-              color='inherit'
-              component='div'
-              sx={{ mr: 2 }}
-            >
-              Users
-            </Typography>
-          </Link>
         </Toolbar>
       </AppBar>
     </Box>
