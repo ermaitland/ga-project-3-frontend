@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { API } from '../../lib/api';
-import { Link } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import React from 'react';
 import Card from '@mui/material/Card';
@@ -31,11 +31,13 @@ export default function BrandProductList() {
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <Link to={`/products/${brandProducts?.productsid}`}>
+      {!brandProducts ? (
+        <p>Loading...</p>
+      ) : (
+        <CardActionArea>
           <div>
             {!brandProducts ? (
-              <p>null</p>
+              <p>Loading...</p>
             ) : (
               <>
                 <CardMedia
@@ -45,18 +47,24 @@ export default function BrandProductList() {
                   alt='green iguana'
                 />
                 {brandProducts?.products.map((brandProduct) => (
-                  <ProductCard
-                    name={brandProduct.name}
-                    image={brandProduct.image}
-                    brand={brandProduct.brand}
-                    category={brandProduct.category}
-                  />
+                  <Link to={`/products/${brandProduct._id}`}>
+                    <ProductCard
+                      name={brandProduct.name}
+                      image={brandProduct.image}
+                      brand={brandProduct.brand}
+                      category={brandProduct.category}
+                      key={brandProduct._id}
+                    />
+                  </Link>
                 ))}
               </>
             )}
           </div>
-        </Link>
-      </CardActionArea>
+        </CardActionArea>
+      )}
     </Card>
   );
+}
+{
+  /* <Link to={`/brands/${brand._id}/products`} key={brand._id}> */
 }

@@ -5,7 +5,6 @@ import { Container, Grid } from '@mui/material';
 
 import ProductCard from './common/ProductCard';
 
-
 export default function ProductsIndex() {
   const [products, setProducts] = useState(null);
 
