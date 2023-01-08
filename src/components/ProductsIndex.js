@@ -5,6 +5,8 @@ import { Container, Grid } from '@mui/material';
 
 import ProductCard from './common/ProductCard';
 import Search from './common/Search';
+import FilterComp from './common/FilterComp';
+import Filter from './common/Filter';
 
 
 export default function ProductsIndex() {
@@ -25,6 +27,7 @@ export default function ProductsIndex() {
   return (
     <Container maxwith='lg'>
       <Search />
+      <FilterComp />
       <Grid container spacing={2}>
         {products.map((product) => (
           <Grid items xs={4} key={product._id}>

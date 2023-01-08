@@ -29,7 +29,11 @@ export default function Search() {
 
   return (
     <Box sx={{ position: 'relative' }} className='SEARCH-CONTAINER'>
-      <TextField value={query} onChange={(e) => setQuery(e.target.value)} />
+      <TextField
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder='Search...'
+      />
       {isOpen && (
         <Box
           sx={{ position: 'absolute', zIndex: 1, width: '250px' }}
