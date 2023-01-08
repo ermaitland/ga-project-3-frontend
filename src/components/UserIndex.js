@@ -19,7 +19,7 @@ export default function UserIndex() {
   }, []);
 
   return (
-    <Container maxwidth='lg'>
+    <Container maxWidth='lg'>
       <Grid container spacing={2}>
         {users?.map((user) => (
           <Grid item xs={4} key={user.id}>
