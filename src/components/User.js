@@ -5,6 +5,7 @@ import { Box, Container } from '@mui/system';
 import ProfilePicture from './common/ProfilePicture';
 import { Button, CardContent, Typography } from '@mui/material';
 import ReviewCard from './common/ReviewCard';
+import '../styles/Users.scss';
 
 export default function User() {
   const { id } = useParams();
@@ -33,36 +34,50 @@ export default function User() {
   const goBackToProducts = () => navigate('/products');
 
   return (
-    <Container>
-      <Box>
-        {singleUser?.user.cloudinaryImageId && (
-          <ProfilePicture imageId={singleUser?.user.cloudinaryImageId} />
-        )}
-      </Box>
-      <Box>
-        <CardContent>
-          <Typography>{singleUser?.user.username}</Typography>
-          {singleUser?.user.reviews && (
-            <Box>
-              {singleUser?.user.reviews.map((review) => (
-                <Typography>
-                  {review.productId}
-                  <ReviewCard
-                    key={review._id}
-                    text={review.text}
-                    reviewer={review.reviewer}
-                    productId={id}
-                    reviewId={review._id}
-                    rating={review.rating}
-                    setIsUpdated={setIsUpdated}
-                  />
-                </Typography>
-              ))}
-            </Box>
+    <Container
+      maxWidth='lg'
+      sx={{ display: 'flex', flexDirection: 'column' }}
+      mt={5}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          mt: 5
+        }}
+      >
+        <Box sx={{ pl: 3 }}>
+          {singleUser?.user.cloudinaryImageId && (
+            <ProfilePicture imageId={singleUser?.user.cloudinaryImageId} />
           )}
-        </CardContent>
-        <Button onClick={goBackToProducts}>Back to Browsing!</Button>
+        </Box>
+
+        <Typography variant='h5' color='text.secondary' sx={{ pr: 3 }}>
+          {singleUser?.user.username}
+        </Typography>
       </Box>
+      <CardContent>
+        {singleUser?.user.reviews && (
+          <Box>
+            {singleUser?.user.reviews.map((review) => (
+              <Typography>
+                {review.productId}
+                <ReviewCard
+                  key={review._id}
+                  text={review.text}
+                  reviewer={review.reviewer}
+                  productId={id}
+                  reviewId={review._id}
+                  rating={review.rating}
+                  setIsUpdated={setIsUpdated}
+                />
+              </Typography>
+            ))}
+          </Box>
+        )}
+      </CardContent>
+      <Button onClick={goBackToProducts}>Back to Browsing!</Button>
     </Container>
   );
 }

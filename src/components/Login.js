@@ -35,7 +35,15 @@ export default function Login() {
   };
 
   return (
-    <Container>
+    <Container
+      maxWidth='lg'
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 500
+      }}
+    >
       <form onSubmit={handleSubmit}>
         <div>
           <TextField
