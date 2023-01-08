@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 
-import { Container, Grid } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
+import '../styles/ProductIndex.scss';
 
 import ProductCard from './common/ProductCard';
+import Search from './common/Search';
+import FilterComp from './common/FilterComp';
+import Filter from './common/Filter';
 
 export default function ProductsIndex() {
   const [products, setProducts] = useState(null);
@@ -21,10 +25,14 @@ export default function ProductsIndex() {
     return <p>Loading</p>;
   }
   return (
-    <Container maxwith='lg'>
+    <Container maxwith='lg' className='ProductIndex'>
+      <Search />
+      <Box sx={{ mb: 2 }}>
+        <FilterComp />
+      </Box>
       <Grid container spacing={2}>
         {products.map((product) => (
-          <Grid items xs={4} key={product._id}>
+          <Grid items sm={12} md={4} key={product._id}>
             <ProductCard
               name={product.name}
               image={product.image}

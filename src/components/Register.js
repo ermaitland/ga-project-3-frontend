@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { AUTH } from '../lib/auth';
+import { FileUploader } from 'react-drag-drop-files';
+
+const fileTypes = ['JPG', 'PNG', 'GIF'];
 
 export default function Register() {
   const navigate = useNavigate();
@@ -19,8 +22,11 @@ export default function Register() {
     setFormFields({ ...formFields, [e.target.name]: e.target.value });
   };
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+  // const handleFileChange = (e) => {
+  //   setFile(e.target.files[0]);
+  // };
+  const handleFileChange = (file) => {
+    setFile(file);
   };
 
   const handleSubmit = async (e) => {
@@ -59,7 +65,15 @@ export default function Register() {
   };
 
   return (
-    <Container>
+    <Container
+      maxWidth='lg'
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 500
+      }}
+    >
       <form onSubmit={handleSubmit}>
         <div>
           <TextField
@@ -118,14 +132,19 @@ export default function Register() {
           />
         </div>
         <div>
-          <TextField
+          <FileUploader
+            handleChange={handleFileChange}
+            name='file'
+            types={fileTypes}
+          />
+          {/* <TextField
             size='small'
             name='profile-picture'
             id='profile-picture'
             type='file'
             onChange={handleFileChange}
             sx={{ mb: 2 }}
-          />
+          /> */}
         </div>
         <Button type='submit'>Register!</Button>
       </form>

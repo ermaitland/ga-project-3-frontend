@@ -15,7 +15,8 @@ const ENDPOINTS = {
   createReview: (id) => `/api/products/${id}/reviews`,
   singleReview: (productId, reviewId) =>
     `/api/products/${productId}/reviews/${reviewId}`,
-  deleteBrand: (id) => `/api/brands/${id}`
+  deleteBrand: (id) => `/api/brands/${id}`,
+  search: (query) => `/api/products/search?search=${query}`
 };
 
 const getHeaders = () => ({
