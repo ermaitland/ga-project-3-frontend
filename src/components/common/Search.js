@@ -17,6 +17,8 @@ export default function Search() {
     });
   }, [query]);
 
+  // console.log('Product data from search', products);
+
   useEffect(() => {
     const clearup = () => {
       setIsOpen(false);
