@@ -57,7 +57,6 @@ export default function FilterComp() {
         labelText='Filter by category'
         placeholderText='Category'
       />
-      ;
     </>
   );
 }

@@ -10,7 +10,8 @@ import {
   CardActions,
   CardContent,
   Button,
-  Typography
+  Typography,
+  Grid
 } from '@mui/material';
 
 import '../styles/Product.scss';
@@ -54,39 +55,48 @@ export default function Product() {
         <h1>this is the product page</h1>
       </div>
       <Container maxWidth='lg' sx={{ display: 'flex' }} className='Product'>
-        <Box>
-          <img src={singleProduct.image} alt={singleProduct.name} />
-        </Box>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Box>
+              <img src={singleProduct.image} alt={singleProduct.name} />
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6}>
+            <CardContent>
+              <Typography variant='h5' component='p'>
+                {singleProduct.name}
+              </Typography>
+              <Typography color='text.secondary'>
+                Brand: {singleProduct.brand.name}
+              </Typography>
+              <Typography color='text.secondary'>
+                Category: {singleProduct.category.name}
+              </Typography>
+              <Typography
+                color='text.primary'
+                sx={{ fontSize: 18 }}
+                gutterBottom
+              >
+                Decription: {singleProduct.description}
+              </Typography>
 
-        <CardContent>
-          <Typography variant='h5' component='p'>
-            {singleProduct.name}
-          </Typography>
-          <Typography color='text.secondary'>
-            Brand: {singleProduct.brand.name}
-          </Typography>
-          <Typography color='text.secondary'>
-            Category: {singleProduct.category.name}
-          </Typography>
-          <Typography color='text.primary' sx={{ fontSize: 18 }} gutterBottom>
-            Decription: {singleProduct.description}
-          </Typography>
+              <ProductRating rating={singleProduct.rating || 0} />
 
-          <ProductRating rating={singleProduct.rating || 0} />
-          <Container>
-            <Typography color='text.primary'>
-              {singleProduct.rating} avg. Rating{' '}
-            </Typography>
-            <Container sx={{ display: 'flex' }}>
+              <Typography color='text.secondary'>
+                {singleProduct.rating || 'no'} avg. Rating{' '}
+              </Typography>
+
               {isNumberOfReviewsOne ? (
-                <Typography>{numberOfReviews} review</Typography>
+                <Typography color='text.secondary'>
+                  {numberOfReviews} Rating and Review
+                </Typography>
               ) : (
-                <Typography>{numberOfReviews} reviews</Typography>
+                <Typography color='text.secondary'>
+                  {numberOfReviews} Ratings and Reviews
+                </Typography>
               )}
-            </Container>
-          </Container>
 
-          {/* <CardActions>
+              {/* <CardActions>
             {isLoggedIn ? (
               !userHasReviewed ? (
                 <Link to={`/products/${singleProduct?._id}/reviews`}>
@@ -101,20 +111,22 @@ export default function Product() {
               </Link>
             )}
           </CardActions> */}
-          <CardActions>
-            {isLoggedIn && !userHasReviewed && (
-              <Link to={`/products/${singleProduct?._id}/reviews`}>
-                <Button size='small'>Create a Review</Button>
-              </Link>
-            )}
+              <CardActions>
+                {isLoggedIn && !userHasReviewed && (
+                  <Link to={`/products/${singleProduct?._id}/reviews`}>
+                    <Button size='small'>Create a Review</Button>
+                  </Link>
+                )}
 
-            {!isLoggedIn && (
-              <Link to={`/login`}>
-                <Button size='small'>Login to create a Review</Button>
-              </Link>
-            )}
-          </CardActions>
-        </CardContent>
+                {!isLoggedIn && (
+                  <Link to={`/login`}>
+                    <Button size='small'>Login to create a Review</Button>
+                  </Link>
+                )}
+              </CardActions>
+            </CardContent>
+          </Grid>
+        </Grid>
       </Container>
       {!!singleProduct?.reviews.length && (
         <Container maxWidth='lg'>
