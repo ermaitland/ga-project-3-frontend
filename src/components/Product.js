@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { API } from '../lib/api';
+import { useAuthenticated } from '../hook/useAuthenticated';
 
 import ProductRating from './common/ProductRating';
 import {
@@ -9,17 +10,20 @@ import {
   CardActions,
   CardContent,
   Button,
-  Typography
+  Typography,
+  Grid
 } from '@mui/material';
 
 import '../styles/Product.scss';
 import ReviewCard from './common/ReviewCard';
+import { AUTH } from '../lib/auth';
 
 export default function Product() {
   // const navigate = useNavigate();
   const [isUpdated, setIsUpdated] = useState(false);
-  const { id } = useParams();
   const [singleProduct, setSingleProduct] = useState(null);
+  const { id } = useParams();
+  const [isLoggedIn] = useAuthenticated();
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.getSingleProduct(id))
@@ -33,9 +37,17 @@ export default function Product() {
     setIsUpdated(false);
   }, [id, isUpdated]);
 
+  const userHasReviewed = useMemo(() => {
+    return singleProduct?.reviews
+      .map((review) => review.reviewer._id)
+      .some((id) => AUTH.isOwner(id));
+  }, [singleProduct]);
+
   if (singleProduct === null) {
     return <p>Data is Loading</p>;
   }
+  const numberOfReviews = singleProduct.reviews.length;
+  let isNumberOfReviewsOne = numberOfReviews === 1;
 
   return (
     <>
@@ -43,29 +55,78 @@ export default function Product() {
         <h1>this is the product page</h1>
       </div>
       <Container maxWidth='lg' sx={{ display: 'flex' }} className='Product'>
-        <Box>
-          <img src={singleProduct.image} alt={singleProduct.name} />
-        </Box>
-        <CardActions>
-          <Link to={`/products/${singleProduct?._id}/reviews`}>
-            <Button size='small'>Create a Review</Button>
-          </Link>
-        </CardActions>
-        <CardContent>
-          <Typography variant='h5' component='p'>
-            {singleProduct.name}
-          </Typography>
-          <Typography color='text.secondary'>
-            Brand: {singleProduct.brand.name}
-          </Typography>
-          <Typography color='text.secondary'>
-            Category: {singleProduct.category.name}
-          </Typography>
-          <Typography color='text.primary' sx={{ fontSize: 18 }} gutterBottom>
-            Decription: {singleProduct.description}
-          </Typography>
-          <ProductRating rating={singleProduct.rating || 0} />
-        </CardContent>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Box>
+              <img src={singleProduct.image} alt={singleProduct.name} />
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6}>
+            <CardContent>
+              <Typography variant='h5' component='p'>
+                {singleProduct.name}
+              </Typography>
+              <Typography color='text.secondary'>
+                Brand: {singleProduct.brand.name}
+              </Typography>
+              <Typography color='text.secondary'>
+                Category: {singleProduct.category.name}
+              </Typography>
+              <Typography
+                color='text.primary'
+                sx={{ fontSize: 18 }}
+                gutterBottom
+              >
+                Decription: {singleProduct.description}
+              </Typography>
+
+              <ProductRating rating={singleProduct.rating || 0} />
+
+              <Typography color='text.secondary'>
+                {singleProduct.rating || 'no'} avg. Rating{' '}
+              </Typography>
+
+              {isNumberOfReviewsOne ? (
+                <Typography color='text.secondary'>
+                  {numberOfReviews} Rating and Review
+                </Typography>
+              ) : (
+                <Typography color='text.secondary'>
+                  {numberOfReviews} Ratings and Reviews
+                </Typography>
+              )}
+
+              {/* <CardActions>
+            {isLoggedIn ? (
+              !userHasReviewed ? (
+                <Link to={`/products/${singleProduct?._id}/reviews`}>
+                  <Button size='small'>Create a Review</Button>
+                </Link>
+              ) : (
+                <p>something</p>
+              )
+            ) : (
+              <Link to={`/login`}>
+                <Button size='small'>Login to create a Review</Button>
+              </Link>
+            )}
+          </CardActions> */}
+              <CardActions>
+                {isLoggedIn && !userHasReviewed && (
+                  <Link to={`/products/${singleProduct?._id}/reviews`}>
+                    <Button size='small'>Create a Review</Button>
+                  </Link>
+                )}
+
+                {!isLoggedIn && (
+                  <Link to={`/login`}>
+                    <Button size='small'>Login to create a Review</Button>
+                  </Link>
+                )}
+              </CardActions>
+            </CardContent>
+          </Grid>
+        </Grid>
       </Container>
       {!!singleProduct?.reviews.length && (
         <Container maxWidth='lg'>
