@@ -6,7 +6,6 @@ import '../styles/ProductIndex.scss';
 
 import ProductCard from './common/ProductCard';
 import Search from './common/Search';
-import Search2 from './common/Search2';
 import FilterComp from './common/FilterComp';
 
 export default function ProductsIndex() {
@@ -31,7 +30,7 @@ export default function ProductsIndex() {
 
   return (
     <Container maxwith='lg' className='ProductIndex'>
-      <Search2 />
+      <Search />
       <Box sx={{ mb: 2 }}>
         <FilterComp
           onBrandsSelected={(selectedBrandOptions) =>
