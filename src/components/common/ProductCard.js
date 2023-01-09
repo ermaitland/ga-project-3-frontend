@@ -13,7 +13,7 @@ import {
 export default function ProductCard({
   name,
   image,
-  brand,
+  brand = 'No Brand',
   category,
   rating,
   id

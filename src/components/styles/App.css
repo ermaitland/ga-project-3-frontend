@@ -1,0 +1,18 @@
+.brand-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    border: 2px solid red;
+    width: 100%;
+}
+
+.brand-container-get-brands{
+    border:2px solid blue;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.brand-card {
+    width: 25%;
+}

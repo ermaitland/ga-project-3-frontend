@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { create } from 'lodash';
 import { AUTH } from './auth';
 
 const ENDPOINTS = {
@@ -19,7 +20,8 @@ const ENDPOINTS = {
   search: (query) => `/api/products/search?search=${query}`,
   deleteCategory: (id) => `/api/categories/${id}`,
   getFilteredProducts: (categories, brands) =>
-    `/api/products/filter?categories=${categories}&brands=${brands}`
+    `/api/products/filter?categories=${categories}&brands=${brands}`,
+  createBrand: '/api/brands'
 };
 
 const getHeaders = () => ({
