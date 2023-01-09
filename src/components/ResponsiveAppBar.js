@@ -40,7 +40,7 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar position='static'>
-      <Container maxWidth='xl'>
+      <Container maxWidth='lg'>
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
@@ -61,7 +61,7 @@ function ResponsiveAppBar() {
             LOGO
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
             {/* <Box> */}
             <Search />
           </Box>
