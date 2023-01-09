@@ -13,6 +13,7 @@ import {
   Typography,
   Grid
 } from '@mui/material';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 import '../styles/Product.scss';
 import ReviewCard from './common/ReviewCard';
@@ -24,6 +25,7 @@ export default function Product() {
   const [singleProduct, setSingleProduct] = useState(null);
   const { id } = useParams();
   const [isLoggedIn] = useAuthenticated();
+  const navigate = useNavigate();
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.getSingleProduct(id))
@@ -62,11 +64,21 @@ export default function Product() {
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
             <CardContent>
-              <Typography variant='h5' component='p'>
-                {singleProduct.name}
-              </Typography>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Typography variant='h5' component='p'>
+                  {singleProduct.name}
+                </Typography>
+                {isLoggedIn &&
+                  (AUTH.getPayload().isAdmin ||
+                    AUTH.isOwner(singleProduct?.review?.reviewer?._id)) && (
+                    <Link to={`/products/${id}/edit`}>
+                      <ModeEditIcon />
+                    </Link>
+                  )}
+              </Box>
+
               <Typography color='text.secondary'>
-                Brand: {singleProduct.brand.name}
+                Brand: {singleProduct?.brand?.name}
               </Typography>
               <Typography color='text.secondary'>
                 Category: {singleProduct.category.name}

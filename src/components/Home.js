@@ -61,7 +61,7 @@ export default function Home() {
           <ProductCard
             name={products[randomProduct]?.name}
             image={products[randomProduct]?.image}
-            brand={products[randomProduct]?.brand.name}
+            brand={products[randomProduct]?.brand?.name}
             category={products[randomProduct]?.category.name}
             id={products[randomProduct]?._id}
             rating={products[randomProduct]?.rating || 0}
