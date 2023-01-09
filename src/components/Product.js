@@ -140,6 +140,7 @@ export default function Product() {
                 reviewId={review._id}
                 rating={review.rating}
                 setIsUpdated={setIsUpdated}
+                productName={review.productName}
               />
             ))}
           </Box>

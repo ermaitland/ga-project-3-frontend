@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { AUTH } from '../lib/auth';
 import { FileUploader } from 'react-drag-drop-files';
+import '../styles/LoginAndRegister.scss';
+import { Box } from '@mui/system';
 
 const fileTypes = ['JPG', 'PNG', 'GIF'];
 
@@ -64,80 +66,83 @@ export default function Register() {
     }
   };
 
+  const navigateToLogin = () => navigate('/login');
+
   return (
-    <Container
-      maxWidth='lg'
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 500
-      }}
-    >
-      <form onSubmit={handleSubmit}>
-        <div>
-          <TextField
-            size='small'
-            name='username'
-            id='username'
-            type='text'
-            label='Username'
-            required={true}
-            value={formFields.username}
-            onChange={handleChange}
-            error={error}
-            sx={{ mb: 2 }}
-          />
-        </div>
-        <div>
-          <TextField
-            size='small'
-            name='email'
-            id='email'
-            type='email'
-            label='Email'
-            required={true}
-            value={formFields.email}
-            onChange={handleChange}
-            error={error}
-            sx={{ mb: 2 }}
-          />
-        </div>
-        <div>
-          <TextField
-            size='small'
-            name='password'
-            id='password'
-            type='password'
-            label='Password'
-            required={true}
-            value={formFields.password}
-            onChange={handleChange}
-            error={error}
-            sx={{ mb: 2 }}
-          />
-        </div>
-        <div>
-          <TextField
-            size='small'
-            name='passwordConfirmation'
-            id='passwordConfirmation'
-            type='password'
-            label='Password Confirmation'
-            required={true}
-            value={formFields.passwordConfirmation}
-            onChange={handleChange}
-            error={error}
-            sx={{ mb: 2 }}
-          />
-        </div>
-        <div>
-          <FileUploader
-            handleChange={handleFileChange}
-            name='file'
-            types={fileTypes}
-          />
-          {/* <TextField
+    <section className='LoginRegister'>
+      <Container
+        maxWidth='lg'
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: 500
+        }}
+      >
+        <form onSubmit={handleSubmit}>
+          <div>
+            <TextField
+              size='small'
+              name='username'
+              id='username'
+              type='text'
+              label='Username'
+              required={true}
+              value={formFields.username}
+              onChange={handleChange}
+              error={error}
+              sx={{ mb: 2 }}
+            />
+          </div>
+          <div>
+            <TextField
+              size='small'
+              name='email'
+              id='email'
+              type='email'
+              label='Email'
+              required={true}
+              value={formFields.email}
+              onChange={handleChange}
+              error={error}
+              sx={{ mb: 2 }}
+            />
+          </div>
+          <div>
+            <TextField
+              size='small'
+              name='password'
+              id='password'
+              type='password'
+              label='Password'
+              required={true}
+              value={formFields.password}
+              onChange={handleChange}
+              error={error}
+              sx={{ mb: 2 }}
+            />
+          </div>
+          <div>
+            <TextField
+              size='small'
+              name='passwordConfirmation'
+              id='passwordConfirmation'
+              type='password'
+              label='Password Confirmation'
+              required={true}
+              value={formFields.passwordConfirmation}
+              onChange={handleChange}
+              error={error}
+              sx={{ mb: 2 }}
+            />
+          </div>
+          <div>
+            <FileUploader
+              handleChange={handleFileChange}
+              name='file'
+              types={fileTypes}
+            />
+            {/* <TextField
             size='small'
             name='profile-picture'
             id='profile-picture'
@@ -145,9 +150,17 @@ export default function Register() {
             onChange={handleFileChange}
             sx={{ mb: 2 }}
           /> */}
-        </div>
-        <Button type='submit'>Register!</Button>
-      </form>
-    </Container>
+          </div>
+          <Box mt={2}>
+            <Button variant='contained' type='submit'>
+              Register!
+            </Button>
+            <Button onClick={navigateToLogin}>
+              Already Registered? Login here
+            </Button>
+          </Box>
+        </form>
+      </Container>
+    </section>
   );
 }
