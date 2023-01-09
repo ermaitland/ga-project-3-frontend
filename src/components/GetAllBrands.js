@@ -61,7 +61,9 @@ export default function GetAllBrandsIndex() {
                           API.ENDPOINTS.deleteBrand(brand._id),
                           API.getHeaders()
                         )
-                          .then(() => console.log('deleted successfully'))
+                          .then(() => {
+                            console.log('deleted successfully');
+                          })
                           .then(() =>
                             API.GET(API.ENDPOINTS.allBrands)
                               .then(({ data }) => {
