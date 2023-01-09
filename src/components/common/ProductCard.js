@@ -22,7 +22,7 @@ export default function ProductCard({
   const navigateToProduct = () => navigate(`/products/${id}`);
 
   return (
-    <Card sx={{ maxWidth: 300, height: 450 }}>
+    <Card sx={{ maxWidth: 400, height: 500 }}>
       <CardActionArea onClick={navigateToProduct}>
         <CardMedia
           component='img'
@@ -31,7 +31,7 @@ export default function ProductCard({
           sx={{ maxHeight: 250, objectFit: 'contain' }}
         />
         <CardContent>
-          <Typography gutterBottom variant='h5' component='div'>
+          <Typography gutterBottom variant='h6' component='div'>
             {name}
           </Typography>
           <Typography variant='body2' color='text.secondary'>

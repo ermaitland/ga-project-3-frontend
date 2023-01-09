@@ -18,6 +18,9 @@ const ENDPOINTS = {
     `/api/products/${productId}/reviews/${reviewId}`,
   deleteBrand: (id) => `/api/brands/${id}`,
   search: (query) => `/api/products/search?search=${query}`,
+  deleteCategory: (id) => `/api/categories/${id}`,
+  getFilteredProducts: (categories, brands) =>
+    `/api/products/filter?categories=${categories}&brands=${brands}`,
   createBrand: '/api/brands'
 };
 

@@ -34,7 +34,7 @@ export default function Navbar() {
               component='div'
               sx={{ mr: 2 }}
             >
-              Vegan Products
+              Products
             </Typography>
           </Link>
           <Link to='/brands'>
@@ -47,27 +47,8 @@ export default function Navbar() {
               Vegan Brands
             </Typography>
           </Link>
-          <Link to='/register'>
-            <Typography
-              variant='h6'
-              color='inherit'
-              component='div'
-              sx={{ mr: 2 }}
-            >
-              Register
-            </Typography>
-          </Link>
-          <Link to='/login'>
-            <Typography
-              variant='h6'
-              color='inherit'
-              component='div'
-              sx={{ mr: 2 }}
-            >
-              Login
-            </Typography>
-          </Link>
-          {isLoggedIn && (
+
+          {isLoggedIn ? (
             <>
               <Link to='/' onClick={logout}>
                 <Typography
@@ -89,19 +70,62 @@ export default function Navbar() {
                   Users
                 </Typography>
               </Link>
-              {AUTH.getPayload().isAdmin && (
-                <Link to='/brands/create'>
-                  <Typography
-                    variant='h6'
-                    color='inherit'
-                    component='div'
-                    sx={{ mr: 2 }}
-                  >
-                    Create Brand
-                  </Typography>
-                </Link>
-              )}
+              <Link to='/products/create'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2 }}
+                >
+                  Add Product
+                </Typography>
+              </Link>
+              <Link to='/products/edit'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2 }}
+                >
+                  Edit Product
+                </Typography>
+              </Link>
             </>
+          ) : (
+            <>
+              <Link to='/register'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2 }}
+                >
+                  Register
+                </Typography>
+              </Link>
+              <Link to='/login'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2 }}
+                >
+                  Login
+                </Typography>
+              </Link>
+            </>
+          )}
+          {AUTH.getPayload().isAdmin && (
+            <Link to='/categories/edit'>
+              <Typography
+                variant='h6'
+                color='inherit'
+                component='div'
+                sx={{ mr: 2 }}
+              >
+                Edit Categories
+              </Typography>
+            </Link>
           )}
         </Toolbar>
       </AppBar>

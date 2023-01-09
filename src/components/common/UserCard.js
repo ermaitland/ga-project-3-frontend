@@ -7,7 +7,7 @@ export default function UserCard({ name, reviews, imageId, userId }) {
   const navigate = useNavigate();
   const navigateToSingleUser = () => navigate(`/profile/${userId}`);
   return (
-    <Card sx={{ display: 'flex' }} className='Users'>
+    <Card sx={{ display: 'flex', mt: '25px' }}>
       <CardActions onClick={navigateToSingleUser}>
         <Box sx={{ display: 'flex', flexDirection: 'column' }} pr={9}>
           <CardContent sx={{ flex: '1 0 auto' }}>

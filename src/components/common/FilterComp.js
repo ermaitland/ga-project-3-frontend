@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 
 import { API } from '../../lib/api';
 
-import { Box } from '@mui/system';
+import { Box, Button, Typography } from '@mui/material';
 
-export default function FilterComp() {
-  const [categories, setCatgories] = useState([]);
+export default function FilterComp({ onBrandsSelected, onCategoriesSelected }) {
+  const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function FilterComp() {
   useEffect(() => {
     API.GET(API.ENDPOINTS.getAllCategories)
       .then(({ data }) => {
-        setCatgories(data);
+        setCategories(data);
       })
       .catch(({ message, response }) => {
         console.error(message, response);
@@ -32,30 +32,44 @@ export default function FilterComp() {
 
   if (brands === null) {
     return <p>Brands still Loading</p>;
-  } else {
-    console.log('Brands Data from FilterComp', brands);
   }
+  // else {
+  //   console.log('Brands Data from FilterComp', brands);
+  // }
 
   if (categories === null) {
     return <p>Categories still Loading</p>;
-  } else {
-    console.log('Categories Data from FilterComp', categories);
   }
+  // else {
+  //   console.log('Categories Data from FilterComp', categories);
+  // }
 
   return (
     <>
-      <p>Filter by</p>
+      <Typography variant='h6' mb={2}>
+        Filter by
+      </Typography>
+
       <Box sx={{ mb: 2 }}>
         <Filter
+          className='marginBottom2'
           pulledOptions={brands}
-          labelLabel='Filter by brand'
+          labelText='Brand'
           placeholderText='Brand'
+          onChange={(event, selectedBrandOptions) => {
+            onBrandsSelected(selectedBrandOptions);
+            console.log('SELECTED BRANDS', selectedBrandOptions);
+          }}
         />
       </Box>
       <Filter
         pulledOptions={categories}
-        labelText='Filter by category'
+        labelText='Category'
         placeholderText='Category'
+        onChange={(event, selectedCategorisOptions) => {
+          onCategoriesSelected(selectedCategorisOptions);
+          console.log('SELECTED CATEGORIES', selectedCategorisOptions);
+        }}
       />
     </>
   );
