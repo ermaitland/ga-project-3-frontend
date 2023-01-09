@@ -18,7 +18,7 @@ export default function ProductsIndex() {
       API.ENDPOINTS.getFilteredProducts(selectedCategories, selectedBrands)
     )
       .then(({ data }) => {
-        console.log('DATA', data);
+        // console.log('DATA', data);
         setProducts(data);
       })
       .catch(({ message, response }) => console.error(message, response));
@@ -29,34 +29,46 @@ export default function ProductsIndex() {
   }
 
   return (
-    <Container maxwith='lg' className='ProductIndex'>
+    <>
       <Search />
-      <Box sx={{ mb: 2 }}>
-        <FilterComp
-          onBrandsSelected={(selectedBrandOptions) =>
-            setSelectedBrands(selectedBrandOptions.map((brand) => brand._id))
-          }
-          onCategoriesSelected={(selectedCategories) =>
-            setSelectedCategories(
-              selectedCategories.map((category) => category._id)
-            )
-          }
-        />
-      </Box>
-      <Grid container spacing={2}>
-        {products.map((product) => (
-          <Grid items sm={12} md={4} key={product._id}>
-            <ProductCard
-              name={product.name}
-              image={product.image}
-              brand={product.brand.name}
-              category={product.category.name}
-              id={product._id}
-              rating={product.rating || 0}
+      <Container
+        maxwith='lg'
+        sx={{ display: 'flex', justifyContent: 'space-around' }}
+      >
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12} md={4}>
+            <FilterComp
+              sx={{ width: 100 }}
+              onBrandsSelected={(selectedBrandOptions) =>
+                setSelectedBrands(
+                  selectedBrandOptions.map((brand) => brand._id)
+                )
+              }
+              onCategoriesSelected={(selectedCategories) =>
+                setSelectedCategories(
+                  selectedCategories.map((category) => category._id)
+                )
+              }
             />
           </Grid>
-        ))}
-      </Grid>
-    </Container>
+          <Grid item xs={12} sm={12} md={8}>
+            <Grid container spacing={2}>
+              {products.map((product) => (
+                <Grid item sm={12} md={4} key={product._id}>
+                  <ProductCard
+                    name={product.name}
+                    image={product.image}
+                    brand={product.brand.name}
+                    category={product.category.name}
+                    id={product._id}
+                    rating={product.rating || 0}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
   );
 }

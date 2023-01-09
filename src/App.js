@@ -17,12 +17,14 @@ import User from './components/User';
 import CreateProduct from './components/ CreateProduct';
 import ReviewProduct from './components/ReviewProduct';
 import EditCategory from './components/EditCategory';
+import ResponsiveAppBar from './components/ResponsiveAppBar';
 
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
 function App() {
   return (
     <Router>
+      <ResponsiveAppBar />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />

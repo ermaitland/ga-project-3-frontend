@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -18,7 +16,6 @@ export default function Filter({
 }) {
   return (
     <Autocomplete
-      // value={value}
       multiple
       id='checkboxes-tags-demo'
       options={pulledOptions}
@@ -36,7 +33,6 @@ export default function Filter({
           {option.name}
         </li>
       )}
-      style={{ width: 500 }}
       renderInput={(params) => (
         <TextField
           {...params}

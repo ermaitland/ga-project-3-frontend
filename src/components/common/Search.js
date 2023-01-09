@@ -49,7 +49,7 @@ export default function Search() {
   }, []);
 
   return (
-    <Stack spacing={2} sx={{ width: 300 }}>
+    <Stack spacing={2} sx={{ width: 600 }}>
       <Autocomplete
         options={query ? filteredProducts : products}
         getOptionLabel={(product) => product.name}

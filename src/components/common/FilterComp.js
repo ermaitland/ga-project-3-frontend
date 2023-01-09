@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { API } from '../../lib/api';
 
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 export default function FilterComp({ onBrandsSelected, onCategoriesSelected }) {
   const [categories, setCategories] = useState([]);
@@ -46,29 +46,31 @@ export default function FilterComp({ onBrandsSelected, onCategoriesSelected }) {
 
   return (
     <>
-      <p>Filter by</p>
+      <Typography variant='h6' mb={2}>
+        Filter by
+      </Typography>
 
       <Box sx={{ mb: 2 }}>
         <Filter
+          className='marginBottom2'
           pulledOptions={brands}
-          labelLabel='Filter by brand'
+          labelText='Brand'
           placeholderText='Brand'
           onChange={(event, selectedBrandOptions) => {
             onBrandsSelected(selectedBrandOptions);
             console.log('SELECTED BRANDS', selectedBrandOptions);
           }}
         />
-        <Filter
-          pulledOptions={categories}
-          labelText='Filter by category'
-          placeholderText='Category'
-          onChange={(event, selectedCategorisOptions) => {
-            onCategoriesSelected(selectedCategorisOptions);
-            console.log('SELECTED CATEGORIES', selectedCategorisOptions);
-          }}
-        />
       </Box>
-      <Button type='submit'>Set Filter</Button>
+      <Filter
+        pulledOptions={categories}
+        labelText='Category'
+        placeholderText='Category'
+        onChange={(event, selectedCategorisOptions) => {
+          onCategoriesSelected(selectedCategorisOptions);
+          console.log('SELECTED CATEGORIES', selectedCategorisOptions);
+        }}
+      />
     </>
   );
 }
