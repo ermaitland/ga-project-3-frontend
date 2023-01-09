@@ -56,7 +56,7 @@ export default function Product() {
       <Container maxWidth='lg' sx={{ display: 'flex' }} className='Product'>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
-            <Box>
+            <Box sx={{ objectFit: 'contain' }}>
               <img src={singleProduct.image} alt={singleProduct.name} />
             </Box>
           </Grid>
