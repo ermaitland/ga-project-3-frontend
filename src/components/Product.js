@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { API } from '../lib/api';
 import { useAuthenticated } from '../hook/useAuthenticated';
 import '../styles/Product.scss';
@@ -21,12 +21,10 @@ import ReviewCard from './common/ReviewCard';
 import { AUTH } from '../lib/auth';
 
 export default function Product() {
-  // const navigate = useNavigate();
   const [isUpdated, setIsUpdated] = useState(false);
   const [singleProduct, setSingleProduct] = useState(null);
   const { id } = useParams();
   const [isLoggedIn] = useAuthenticated();
-  const navigate = useNavigate();
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.getSingleProduct(id))

@@ -35,8 +35,6 @@ export default function EditProduct() {
       .then(({ data }) => {
         setExistingProductInfo(data);
         setFormData(data);
-        console.log('EXISTING PROD INFO', existingProductInfo);
-        console.log('EXISTING brand name', formData.brand.name);
       })
       .catch((e) => console.log(e));
   }, [id]);
