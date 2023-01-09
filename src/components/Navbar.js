@@ -85,16 +85,6 @@ export default function Navbar() {
                   Add Product
                 </Typography>
               </Link>
-              <Link to='/products/edit'>
-                <Typography
-                  variant='h6'
-                  color='inherit'
-                  component='div'
-                  sx={{ mr: 2, color: 'black' }}
-                >
-                  Edit Product
-                </Typography>
-              </Link>
               <Link to='/users'>
                 <Typography
                   variant='h6'
