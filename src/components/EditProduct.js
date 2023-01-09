@@ -13,6 +13,7 @@ import {
   Typography
 } from '@mui/material';
 import { API } from '../lib/api';
+import '../styles/ProductIndex.scss';
 
 export default function EditProduct() {
   const navigate = useNavigate();
@@ -78,13 +79,10 @@ export default function EditProduct() {
   };
 
   return (
-    <>
-      <Typography variant='h2' component='p'>
-        Edit Product
-      </Typography>
+    <Box className='editCategory'>
       <Container
         maxWidth='lg'
-        sx={{ display: 'flex', justifyContent: 'center', pt: 5 }}
+        sx={{ display: 'flex', justifyContent: 'center', pt: 10 }}
       >
         <Box sx={{ width: 600 }}>
           <form onSubmit={handleSubmit}>
@@ -168,7 +166,7 @@ export default function EditProduct() {
           </form>
         </Box>
       </Container>
-    </>
+    </Box>
   );
 }
 
