@@ -39,7 +39,7 @@ export default function CreateNewBrand() {
   };
 
   return (
-    <div className='create-brand-items'>
+    <div className='create-brand-item'>
       <Container
         maxWidth='lg'
         sx={{ display: 'flex', justifyContent: 'center', pt: 5 }}
