@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 import { Link } from 'react-router-dom';
 import { AUTH } from '../lib/auth';
-import '../styles/GetAllBrand';
+import '../styles/GetAllBrand.scss';
 
 import {
   CardActionArea,
