@@ -19,7 +19,8 @@ export default function ReviewCard({
   productId,
   reviewId,
   rating,
-  setIsUpdated
+  setIsUpdated,
+  productName
 }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [reviewText, setReviewText] = useState(text);
@@ -92,9 +93,14 @@ export default function ReviewCard({
             style={{ width: '100%', height: '22px' }}
           />
         ) : (
-          <Typography variant='h5' component='div'>
-            {text}
-          </Typography>
+          <>
+            <Typography variant='h6' component='div'>
+              Product: {productName}
+            </Typography>
+            <Typography variant='h6' component='div'>
+              {text}
+            </Typography>
+          </>
         )}
         <Rating />
       </CardContent>

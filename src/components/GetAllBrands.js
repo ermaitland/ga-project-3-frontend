@@ -44,7 +44,7 @@ export default function GetAllBrandsIndex() {
                         image={brand?.image}
                       />
                       <CardContent>
-                        <Button gutterbutton variant='h5' component='div'>
+                        <Button variant='h5' component='div'>
                           {brand?.name}
                         </Button>
                       </CardContent>

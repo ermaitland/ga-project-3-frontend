@@ -3,6 +3,7 @@ import { Container } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 import UserCard from './common/UserCard';
+import '../styles/Users.scss';
 
 export default function UserIndex() {
   const [users, setUsers] = useState(null);
@@ -19,20 +20,22 @@ export default function UserIndex() {
   }, []);
 
   return (
-    <Container maxWidth='lg'>
-      <Grid container spacing={2}>
-        {users?.map((user) => (
-          <Grid item xs={4} key={user.id}>
-            <UserCard
-              mt={1}
-              name={user.username}
-              reviews={user.reviews.length}
-              imageId={user.cloudinaryImageId}
-              userId={user._id}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <section className='Users'>
+      <Container maxWidth='lg'>
+        <Grid container spacing={2}>
+          {users?.map((user) => (
+            <Grid item xs={4} key={user.id}>
+              <UserCard
+                mt={1}
+                name={user.username}
+                reviews={user.reviews.length}
+                imageId={user.cloudinaryImageId}
+                userId={user._id}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </section>
   );
 }

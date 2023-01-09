@@ -47,26 +47,30 @@ export default function Navbar() {
               Vegan Brands
             </Typography>
           </Link>
-          <Link to='/register'>
-            <Typography
-              variant='h6'
-              color='inherit'
-              component='div'
-              sx={{ mr: 2 }}
-            >
-              Register
-            </Typography>
-          </Link>
-          <Link to='/login'>
-            <Typography
-              variant='h6'
-              color='inherit'
-              component='div'
-              sx={{ mr: 2 }}
-            >
-              Login
-            </Typography>
-          </Link>
+          {!isLoggedIn && (
+            <>
+              <Link to='/register'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2 }}
+                >
+                  Register
+                </Typography>
+              </Link>
+              <Link to='/login'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2 }}
+                >
+                  Login
+                </Typography>
+              </Link>{' '}
+            </>
+          )}
           {isLoggedIn && (
             <>
               <Link to='/' onClick={logout}>
