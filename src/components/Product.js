@@ -29,7 +29,6 @@ export default function Product() {
     API.GET(API.ENDPOINTS.getSingleProduct(id))
       .then(({ data }) => {
         setSingleProduct(data);
-        console.log(`SINGLE PRODUCT DATA: ${data}`);
       })
       .catch(({ message, response }) => {
         console.error(message, response);
@@ -67,7 +66,7 @@ export default function Product() {
                 {singleProduct.name}
               </Typography>
               <Typography color='text.secondary'>
-                Brand: {singleProduct.brand.name}
+                Brand: {singleProduct?.brand?.name}
               </Typography>
               <Typography color='text.secondary'>
                 Category: {singleProduct.category.name}
