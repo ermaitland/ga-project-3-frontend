@@ -19,6 +19,7 @@ import ReviewProduct from './components/ReviewProduct';
 import EditCategory from './components/EditCategory';
 import ResponsiveAppBar from './components/ResponsiveAppBar';
 import CreateNewBrand from './components/CreateBrand';
+import EditProduct from './components/EditProduct';
 
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
@@ -32,6 +33,7 @@ function App() {
         <Route path='/products' element={<ProductsIndex />} />
         <Route path='/products/create' element={<CreateProduct />} />
         <Route path='/products/:id' element={<Product />} />
+        <Route path='/products/:id/edit' element={<EditProduct />} />
         <Route path='/products/:id/reviews' element={<ReviewProduct />} />
         <Route path='/brands/:id/products' element={<BrandProductList />} />
         <Route path='/profile/:userId' element={<User />} />

@@ -62,7 +62,7 @@ export default function ProductsIndex() {
                     name={product.name}
                     image={product.image}
                     brand={product?.brand?.name}
-                    category={product.category.name}
+                    category={product?.category?.name}
                     id={product._id}
                     rating={product.rating || 0}
                   />

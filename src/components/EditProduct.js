@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { NOTIFY } from '../lib/notifications';
 import {
   TextField,
@@ -14,8 +14,9 @@ import {
 } from '@mui/material';
 import { API } from '../lib/api';
 
-export default function CreateProduct() {
+export default function EditProduct() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -24,8 +25,18 @@ export default function CreateProduct() {
     brand: ''
   });
   const [error, setError] = useState(false);
+  const [existingProductInfo, setExistingProductInfo] = useState([]);
   const [availableBrands, setAvailableBrands] = useState([]);
   const [availableCategories, setAvailableCategories] = useState([]);
+
+  useEffect(() => {
+    API.GET(API.ENDPOINTS.getSingleProduct(id))
+      .then(({ data }) => {
+        setExistingProductInfo(data);
+        console.log('EXISTING PROD INFO', existingProductInfo);
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.allBrands)
@@ -73,7 +84,7 @@ export default function CreateProduct() {
   return (
     <>
       <Typography variant='h2' component='p'>
-        Create a Product
+        Edit Product
       </Typography>
       <Container
         maxWidth='lg'
@@ -151,7 +162,7 @@ export default function CreateProduct() {
               </Select>
             </FormControl>
           </Box>
-          <Button type='submit'>ADD MY PRODUCT</Button>
+          <Button type='submit'>Edit Product</Button>
         </form>
       </Container>
     </>

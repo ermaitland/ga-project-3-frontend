@@ -7,14 +7,15 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  CardActionArea
+  CardActionArea,
+  Box
 } from '@mui/material';
 
 export default function ProductCard({
   name,
   image,
   brand = 'No Brand',
-  category,
+  category = 'No Category',
   rating,
   id
 }) {
@@ -40,7 +41,9 @@ export default function ProductCard({
           <Typography variant='body2' color='text.secondary'>
             {category}
           </Typography>
-          <ProductRating rating={rating} size='sm' />
+          <Box sx={{ minWidth: 'max-content' }}>
+            <ProductRating rating={rating} size='sm' />
+          </Box>
         </CardContent>
       </CardActionArea>
     </Card>
