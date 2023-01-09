@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { API } from '../lib/api';
 import { useAuthenticated } from '../hook/useAuthenticated';
+import '../styles/Product.scss';
 
 import ProductRating from './common/ProductRating';
 import {
@@ -51,10 +52,7 @@ export default function Product() {
   let isNumberOfReviewsOne = numberOfReviews === 1;
 
   return (
-    <>
-      <div>
-        <h1>this is the product page</h1>
-      </div>
+    <section className='Product'>
       <Container maxWidth='lg' sx={{ display: 'flex' }} className='Product'>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
@@ -157,6 +155,6 @@ export default function Product() {
           </Box>
         </Container>
       )}
-    </>
+    </section>
   );
 }

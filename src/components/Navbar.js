@@ -48,18 +48,33 @@ export default function Navbar() {
               Vegan Brands
             </Typography>
           </Link>
-          {isLoggedIn ? (
+          {AUTH.getPayload().isAdmin && (
             <>
-              <Link to='/users'>
+              <Link to='/categories/edit'>
                 <Typography
                   variant='h6'
                   color='inherit'
                   component='div'
                   sx={{ mr: 2, color: 'black' }}
                 >
-                  Users
+                  Edit Categories
                 </Typography>
               </Link>
+              <Link to='/brands/create'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2, color: 'black' }}
+                >
+                  Create Brand
+                </Typography>
+              </Link>
+            </>
+          )}
+
+          {isLoggedIn ? (
+            <>
               <Link to='/products/create'>
                 <Typography
                   variant='h6'
@@ -78,6 +93,16 @@ export default function Navbar() {
                   sx={{ mr: 2, color: 'black' }}
                 >
                   Edit Product
+                </Typography>
+              </Link>
+              <Link to='/users'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2, color: 'black' }}
+                >
+                  Users
                 </Typography>
               </Link>
               <Link to='/' onClick={logout}>
@@ -111,31 +136,6 @@ export default function Navbar() {
                   sx={{ mr: 2, color: 'black' }}
                 >
                   Login
-                </Typography>
-              </Link>
-            </>
-          )}
-          {AUTH.getPayload().isAdmin && (
-            <>
-              <Link to='/categories/edit'>
-                <Typography
-                  variant='h6'
-                  color='inherit'
-                  component='div'
-                  sx={{ mr: 2, color: 'black' }}
-                >
-                  Edit Categories
-                </Typography>
-              </Link>
-
-              <Link to='/brands/create'>
-                <Typography
-                  variant='h6'
-                  color='inherit'
-                  component='div'
-                  sx={{ mr: 2, color: 'black' }}
-                >
-                  Create Brand
                 </Typography>
               </Link>
             </>
