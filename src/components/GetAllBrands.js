@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 import { Link } from 'react-router-dom';
 import { AUTH } from '../lib/auth';
+import '../styles/GetAllBrand';
 
 import {
   CardActionArea,
@@ -11,7 +12,7 @@ import {
   Button
 } from '@mui/material';
 import { useAuthenticated } from '../hook/useAuthenticated';
-import './styles/App.css';
+import '../styles/App.css';
 
 export default function GetAllBrandsIndex() {
   const [brands, setBrands] = useState(null);
@@ -37,53 +38,59 @@ export default function GetAllBrandsIndex() {
             <div key={brand._id} className='brand-card'>
               <Link to={`/brands/${brand._id}/products`}>
                 <Card sx={{ maxWidth: 345 }}>
-                  <CardActionArea>
-                    <CardMedia
-                      component='img'
-                      height='140'
-                      alt='vegan food iamge'
-                      image={brand?.image}
-                    />
-                    <CardContent>
-                      <Button gutterbutton='true' variant='h5' component='div'>
-                        {brand?.name}
-                      </Button>
-                    </CardContent>
-                  </CardActionArea>
+                  <div className='brand-container-content'>
+                    <CardActionArea>
+                      <CardMedia
+                        component='img'
+                        height='140'
+                        alt='vegan food iamge'
+                        image={brand?.image}
+                      />
+                      <CardContent>
+                        <Button
+                          gutterbutton='true'
+                          variant='h5'
+                          component='div'
+                        >
+                          {brand?.name}
+                        </Button>
+                      </CardContent>
+                    </CardActionArea>
+                    {isLoggedIn ? (
+                      <>
+                        {AUTH.getPayload().isAdmin && (
+                          <button
+                            onClick={() => {
+                              API.DELETE(
+                                API.ENDPOINTS.deleteBrand(brand._id),
+                                API.getHeaders()
+                              )
+                                .then(() => {
+                                  console.log('deleted successfully');
+                                })
+                                .then(() =>
+                                  API.GET(API.ENDPOINTS.allBrands)
+                                    .then(({ data }) => {
+                                      setBrands(data);
+                                    })
+                                    .catch(({ message, response }) => {
+                                      console.error(message, response);
+                                    })
+                                )
+                                .catch((e) => console.log(e));
+                            }}
+                          >
+                            {' '}
+                            Delete{' '}
+                          </button>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
                 </Card>
               </Link>
-              {isLoggedIn ? (
-                <>
-                  {AUTH.getPayload().isAdmin && (
-                    <button
-                      onClick={() => {
-                        API.DELETE(
-                          API.ENDPOINTS.deleteBrand(brand._id),
-                          API.getHeaders()
-                        )
-                          .then(() => {
-                            console.log('deleted successfully');
-                          })
-                          .then(() =>
-                            API.GET(API.ENDPOINTS.allBrands)
-                              .then(({ data }) => {
-                                setBrands(data);
-                              })
-                              .catch(({ message, response }) => {
-                                console.error(message, response);
-                              })
-                          )
-                          .catch((e) => console.log(e));
-                      }}
-                    >
-                      {' '}
-                      Delete{' '}
-                    </button>
-                  )}
-                </>
-              ) : (
-                <></>
-              )}
             </div>
           ))}
         </div>
