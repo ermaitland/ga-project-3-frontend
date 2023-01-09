@@ -122,7 +122,7 @@ export default function Navbar() {
                   variant='h6'
                   color='inherit'
                   component='div'
-                  sx={{ mr: 2 }}
+                  sx={{ mr: 2, color: 'black' }}
                 >
                   Edit Categories
                 </Typography>
@@ -133,7 +133,7 @@ export default function Navbar() {
                   variant='h6'
                   color='inherit'
                   component='div'
-                  sx={{ mr: 2 }}
+                  sx={{ mr: 2, color: 'black' }}
                 >
                   Create Brand
                 </Typography>
