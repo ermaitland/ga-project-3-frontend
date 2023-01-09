@@ -3,6 +3,8 @@ import { TextField, Container, Box, Button } from '@mui/material';
 import { API } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
 
+import '../styles/CreateBrand.scss';
+
 export default function CreateNewBrand() {
   const [formData, setFormData] = useState({
     name: '',
@@ -37,35 +39,37 @@ export default function CreateNewBrand() {
   };
 
   return (
-    <Container
-      maxWidth='lg'
-      sx={{ display: 'flex', justifyContent: 'center', pt: 5 }}
-    >
-      <form onSubmit={handleSubmit}>
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='text'
-            value={formData.name}
-            onChange={handleChange}
-            error={error}
-            label='Name'
-            name='name'
-          />
-        </Box>
-        <Box sx={{ mb: 2 }}>
-          <TextField
-            size='small'
-            type='text'
-            value={formData.image}
-            onChange={handleChange}
-            error={error}
-            label='Image'
-            name='image'
-          />
-        </Box>
-        <Button type='submit'>Add a brand</Button>
-      </form>
-    </Container>
+    <div className='create-brand-items'>
+      <Container
+        maxWidth='lg'
+        sx={{ display: 'flex', justifyContent: 'center', pt: 5 }}
+      >
+        <form onSubmit={handleSubmit}>
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              size='small'
+              type='text'
+              value={formData.name}
+              onChange={handleChange}
+              error={error}
+              label='Name'
+              name='name'
+            />
+          </Box>
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              size='small'
+              type='text'
+              value={formData.image}
+              onChange={handleChange}
+              error={error}
+              label='Image'
+              name='image'
+            />
+          </Box>
+          <Button type='submit'>Add a brand</Button>
+        </form>
+      </Container>
+    </div>
   );
 }
