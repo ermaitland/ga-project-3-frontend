@@ -1,0 +1,54 @@
+.Home {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgb(253, 244, 246);
+  height: 100vh;
+  .banner {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    margin-bottom: 10vh;
+    padding: 30px;
+    height: 250px;
+    .bannerText {
+      align-items: center;
+      padding-left: 11vw;
+      // text-align: center;
+      width: 600px;
+      font-size: larger;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+        'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    .veganImage {
+      width: 705px;
+      padding-left: 10vw;
+    }
+  }
+  img {
+    margin-left: 12px;
+    height: 200px;
+    width: 200px;
+  }
+  .exampleProfilePicture {
+    height: 40px;
+    width: 40px;
+  }
+  .productsAndReviews {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    margin-top: 15px;
+
+    .ProductCard {
+      margin-right: 100px;
+    }
+    .ReviewCard {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 30px;
+      // margin-left: 75px;
+      margin-top: 10px;
+    }
+  }
+}
