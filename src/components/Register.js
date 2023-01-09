@@ -136,20 +136,15 @@ export default function Register() {
               sx={{ mb: 2 }}
             />
           </div>
+          <Box sx={{ pb: 2 }}>
+            <p>Upload your profile picture:</p>
+          </Box>
           <div>
             <FileUploader
               handleChange={handleFileChange}
               name='file'
               types={fileTypes}
             />
-            {/* <TextField
-            size='small'
-            name='profile-picture'
-            id='profile-picture'
-            type='file'
-            onChange={handleFileChange}
-            sx={{ mb: 2 }}
-          /> */}
           </div>
           <Box mt={2}>
             <Button variant='contained' type='submit'>

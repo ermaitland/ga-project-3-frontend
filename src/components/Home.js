@@ -5,7 +5,14 @@ import '../styles/Home.scss';
 import ProductCard from '../components/common/ProductCard';
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
-import { Card, CardContent, Box, Typography, Button } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  Box,
+  Typography,
+  Button,
+  Grid
+} from '@mui/material';
 import ProductRating from './common/ProductRating';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,22 +47,26 @@ export default function Home() {
 
   return (
     <section className='Home'>
-      <div className='banner'>
-        <img src={Logo} alt='Tazty alternativez logo' />
-        <div className='bannerText'>
-          <h1>Find your tazty alternative now!</h1>
-          <p>
-            Mylks, cheezes, meatz & more - find the highest rated ones and help
-            others find tazty products with your reviews!
-          </p>
-          <Button onClick={navigateToBrowse}>Browse Products</Button>
-        </div>
-        <img
-          src={VeganFood}
-          alt='Example of vegan food'
-          className='veganImage'
-        />
-      </div>
+      <Grid>
+        <Grid item l={3} sm={6} md={4}>
+          <div className='banner'>
+            <img src={Logo} alt='Tazty alternativez logo' />
+            <div className='bannerText'>
+              <h1>Find your tazty alternative now!</h1>
+              <p>
+                Mylks, cheezes, meatz & more - find the highest rated ones and
+                help others find tazty products with your reviews!
+              </p>
+              <Button onClick={navigateToBrowse}>Browse Products</Button>
+            </div>
+            <img
+              src={VeganFood}
+              alt='Example of vegan food'
+              className='veganImage'
+            />
+          </div>
+        </Grid>
+      </Grid>
       <div className='productsAndReviews'>
         <div className='ProductCard'>
           <ProductCard
