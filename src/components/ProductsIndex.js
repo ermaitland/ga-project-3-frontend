@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 
-import { Box, Container, Grid, useStepContext } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import '../styles/ProductIndex.scss';
 
 import ProductCard from './common/ProductCard';
-import Search from './common/Search';
 import FilterComp from './common/FilterComp';
 
 export default function ProductsIndex() {
