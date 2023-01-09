@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 
 import ProductCard from './ProductCard';
+import '../../styles/BrandsProductsList.scss';
 
 export default function BrandProductList() {
   console.log('heollo');
@@ -26,22 +27,26 @@ export default function BrandProductList() {
   console.log('The information', brandProducts);
 
   return (
-    <div className='brand-container'>
-      {!brandProducts ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          {brandProducts?.products.map((brandProduct) => (
-            <Link to={`/products/${brandProduct._id}`} key={brandProduct._id}>
-              <ProductCard
-                name={brandProduct.name}
-                image={brandProduct.image}
-                description={brandProduct.description}
-              />
-            </Link>
-          ))}
-        </>
-      )}
-    </div>
+    <section className='brand-page'>
+      <div className='brand-container'>
+        {!brandProducts ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            {brandProducts?.products.map((brandProduct) => (
+              <Link to={`/products/${brandProduct._id}`} key={brandProduct._id}>
+                <div className='brand-container-contents'>
+                  <ProductCard
+                    name={brandProduct.name}
+                    image={brandProduct.image}
+                    description={brandProduct.description}
+                  />
+                </div>
+              </Link>
+            ))}
+          </>
+        )}
+      </div>
+    </section>
   );
 }

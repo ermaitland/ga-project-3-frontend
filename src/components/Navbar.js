@@ -23,7 +23,7 @@ export default function Navbar() {
               variant='h6'
               color='inherit'
               component='div'
-              sx={{ mr: 2, color: 'black' }}
+              sx={{ mr: 2 }}
             >
               Home
             </Typography>
@@ -33,7 +33,7 @@ export default function Navbar() {
               variant='h6'
               color='inherit'
               component='div'
-              sx={{ mr: 2, color: 'black' }}
+              sx={{ mr: 2 }}
             >
               Products
             </Typography>
@@ -43,7 +43,7 @@ export default function Navbar() {
               variant='h6'
               color='inherit'
               component='div'
-              sx={{ mr: 2, color: 'black' }}
+              sx={{ mr: 2 }}
             >
               Vegan Brands
             </Typography>
