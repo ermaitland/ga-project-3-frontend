@@ -47,7 +47,6 @@ export default function Navbar() {
               Vegan Brands
             </Typography>
           </Link>
-
           {isLoggedIn ? (
             <>
               <Link to='/' onClick={logout}>
@@ -116,16 +115,29 @@ export default function Navbar() {
             </>
           )}
           {AUTH.getPayload().isAdmin && (
-            <Link to='/categories/edit'>
-              <Typography
-                variant='h6'
-                color='inherit'
-                component='div'
-                sx={{ mr: 2 }}
-              >
-                Edit Categories
-              </Typography>
-            </Link>
+            <>
+              <Link to='/categories/edit'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2 }}
+                >
+                  Edit Categories
+                </Typography>
+              </Link>
+
+              <Link to='/brands/create'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2 }}
+                >
+                  Create Brand
+                </Typography>
+              </Link>
+            </>
           )}
         </Toolbar>
       </AppBar>
