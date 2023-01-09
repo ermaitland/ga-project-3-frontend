@@ -17,6 +17,7 @@ import User from './components/User';
 import CreateProduct from './components/ CreateProduct';
 import ReviewProduct from './components/ReviewProduct';
 import CreateCategory from './components/CreateCategory';
+import CreateNewBrand from './components/CreateBrand';
 
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
@@ -34,6 +35,7 @@ function App() {
         <Route path='/profile/:userId' element={<User />} />
         <Route path='/users' element={<UserIndex />} />
         <Route path='/brands' element={<GetAllBrands />} />
+        <Route path='/brands/create' element={<CreateNewBrand />} />
         <Route path='/categories/create' element={<CreateCategory />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />

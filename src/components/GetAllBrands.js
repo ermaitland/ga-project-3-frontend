@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
 import { Link } from 'react-router-dom';
+import { AUTH } from '../lib/auth';
 
 import {
   CardActionArea,
@@ -10,6 +11,7 @@ import {
   Button
 } from '@mui/material';
 import { useAuthenticated } from '../hook/useAuthenticated';
+import './styles/App.css';
 
 export default function GetAllBrandsIndex() {
   const [brands, setBrands] = useState(null);
@@ -26,33 +28,33 @@ export default function GetAllBrandsIndex() {
   }, []);
 
   return (
-    <CardContent>
-      <div>
-        {!brands ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-            {brands?.map((brand) => (
-              <>
-                <Link to={`/brands/${brand._id}/products`} key={brand._id}>
-                  <Card sx={{ maxWidth: 345 }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component='img'
-                        height='140'
-                        alt='vegan food iamge'
-                        image={brand?.image}
-                      />
-                      <CardContent>
-                        <Button gutterbutton variant='h5' component='div'>
-                          {brand?.name}
-                        </Button>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Link>
-                {isLoggedIn ? (
-                  <>
+    <div>
+      {!brands ? (
+        <p>Loading...</p>
+      ) : (
+        <div className='brand-container-get-brands'>
+          {brands?.map((brand) => (
+            <div key={brand._id} className='brand-card'>
+              <Link to={`/brands/${brand._id}/products`}>
+                <Card sx={{ maxWidth: 345 }}>
+                  <CardActionArea>
+                    <CardMedia
+                      component='img'
+                      height='140'
+                      alt='vegan food iamge'
+                      image={brand?.image}
+                    />
+                    <CardContent>
+                      <Button gutterbutton='true' variant='h5' component='div'>
+                        {brand?.name}
+                      </Button>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Link>
+              {isLoggedIn ? (
+                <>
+                  {AUTH.getPayload().isAdmin && (
                     <button
                       onClick={() => {
                         API.DELETE(
@@ -75,16 +77,16 @@ export default function GetAllBrandsIndex() {
                       {' '}
                       Delete{' '}
                     </button>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </>
-            ))}
-          </>
-        )}
-      </div>
-    </CardContent>
+                  )}
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 

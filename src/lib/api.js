@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { create } from 'lodash';
 import { AUTH } from './auth';
 
 const ENDPOINTS = {
@@ -16,7 +17,8 @@ const ENDPOINTS = {
   singleReview: (productId, reviewId) =>
     `/api/products/${productId}/reviews/${reviewId}`,
   deleteBrand: (id) => `/api/brands/${id}`,
-  search: (query) => `/api/products/search?search=${query}`
+  search: (query) => `/api/products/search?search=${query}`,
+  createBrand: '/api/brands'
 };
 
 const getHeaders = () => ({
