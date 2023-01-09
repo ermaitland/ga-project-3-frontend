@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 
 import { API } from '../lib/api';
+import '../styles/ProductIndex.scss';
 
 export default function EditCategory() {
   const [formData, setFormData] = useState({
@@ -55,11 +56,17 @@ export default function EditCategory() {
   };
 
   return (
-    <>
-      <Typography variant='h5' component='p'>
-        Edit Category
-      </Typography>
-      <Container maxWidth='lg' sx={{ display: 'flex' }}>
+    <Box className='editCategory'>
+      <Container
+        maxWidth='lg'
+        sx={{
+          display: 'flex',
+          pt: 10,
+          disply: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={6}>
             <Box sx={{ mb: 2 }}>
@@ -67,8 +74,8 @@ export default function EditCategory() {
                 Already Available Categories
               </Typography>
               {availableCategories.map((category) => (
-                <Card sx={{ mb: 2 }}>
-                  <CardContent>
+                <Card sx={{ mb: 2, backgroundColor: 'rgb(249, 230, 246)' }}>
+                  <CardContent className='optionBox'>
                     <Typography variant='h5' component='p' key={category._id}>
                       {category.name}
                     </Typography>
@@ -121,6 +128,6 @@ export default function EditCategory() {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </Box>
   );
 }

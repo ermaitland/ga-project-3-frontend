@@ -52,7 +52,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none'
             }}
           >
-            Tazty Alternativez
+            🌱Tazty Alternativez
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>

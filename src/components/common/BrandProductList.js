@@ -4,7 +4,6 @@ import { API } from '../../lib/api';
 import { Link } from 'react-router-dom';
 
 import React from 'react';
-import '../styles/App.css';
 
 import ProductCard from './ProductCard';
 
