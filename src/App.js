@@ -10,7 +10,7 @@ import Register from './components/Register';
 import GetAllBrands from './components/GetAllBrands';
 import BrandProductList from './components/common/BrandProductList';
 
-import './styles/App.css';
+import './styles/Index.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import UserIndex from './components/UserIndex';
 import User from './components/User';
