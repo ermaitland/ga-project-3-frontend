@@ -29,7 +29,6 @@ export default function Product() {
     API.GET(API.ENDPOINTS.getSingleProduct(id))
       .then(({ data }) => {
         setSingleProduct(data);
-        console.log(`SINGLE PRODUCT DATA: ${data}`);
       })
       .catch(({ message, response }) => {
         console.error(message, response);
