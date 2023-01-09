@@ -50,8 +50,8 @@ export default function Product() {
   let isNumberOfReviewsOne = numberOfReviews === 1;
 
   return (
-    <section className='Product'>
-      <Container maxWidth='lg' sx={{ display: 'flex' }} className='Product'>
+    <Box className='Product' sx={{ backgroundColor: 'rgb(253, 244, 246)' }}>
+      <Container maxWidth='lg' sx={{ display: 'flex' }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ objectFit: 'contain' }}>
@@ -153,6 +153,6 @@ export default function Product() {
           </Box>
         </Container>
       )}
-    </section>
+    </Box>
   );
 }
