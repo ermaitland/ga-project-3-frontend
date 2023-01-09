@@ -13,6 +13,7 @@ import {
   Typography
 } from '@mui/material';
 import { API } from '../lib/api';
+import '../styles/ProductIndex.scss';
 
 export default function EditProduct() {
   const navigate = useNavigate();
@@ -33,10 +34,10 @@ export default function EditProduct() {
     API.GET(API.ENDPOINTS.getSingleProduct(id))
       .then(({ data }) => {
         setExistingProductInfo(data);
-        console.log('EXISTING PROD INFO', existingProductInfo);
+        setFormData(data);
       })
       .catch((e) => console.log(e));
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.allBrands)
@@ -58,19 +59,13 @@ export default function EditProduct() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data =
-      formData.brand && formData.category
-        ? formData
-        : {
-            name: formData.name,
-            description: formData.description,
-            // type: formData.type,
-            image: formData.image
-          };
+    const data = formData;
 
-    API.POST(API.ENDPOINTS.getAllProducts, data, API.getHeaders())
+    API.PUT(API.ENDPOINTS.getSingleProduct(id), data, API.getHeaders())
       .then(({ data }) => {
-        NOTIFY.SUCCESS(`Created ${data.name}`);
+        setFormData(data);
+        console.log('EDITED INFO', existingProductInfo);
+        NOTIFY.SUCCESS(`Edited ${data.name}`);
         navigate(`/products/${data._id}`);
       })
       .catch((e) => {
@@ -82,90 +77,94 @@ export default function EditProduct() {
   };
 
   return (
-    <>
-      <Typography variant='h2' component='p'>
-        Edit Product
-      </Typography>
+    <Box className='editCategory'>
       <Container
         maxWidth='lg'
-        sx={{ display: 'flex', justifyContent: 'center', pt: 5 }}
+        sx={{ display: 'flex', justifyContent: 'center', pt: 10 }}
       >
-        <form onSubmit={handleSubmit}>
-          <Box sx={{ mb: 2 }}>
-            <TextField
-              size='small'
-              type='text'
-              value={formData.name}
-              onChange={handleChange}
-              error={error}
-              label='Name'
-              name='name'
-            />
-          </Box>
-          <Box sx={{ mb: 2 }}>
-            <TextField
-              size='small'
-              type='text'
-              value={formData.description}
-              onChange={handleChange}
-              error={error}
-              label='Description'
-              name='description'
-            />
-          </Box>
-          <Box sx={{ mb: 2 }}>
-            <TextField
-              size='small'
-              type='text'
-              value={formData.image}
-              onChange={handleChange}
-              error={error}
-              label='Image'
-              name='image'
-            />
-          </Box>
-          <Box sx={{ mb: 2 }}>
-            <FormControl fullWidth>
-              <InputLabel id='brand'>Brand</InputLabel>
-              <Select
+        <Box sx={{ width: 600 }}>
+          <form onSubmit={handleSubmit}>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                sx={{ width: 600 }}
                 size='small'
-                labelId='brand'
-                value={formData.brand}
-                label='Brand'
-                name='brand'
+                type='text'
+                value={formData.name}
                 onChange={handleChange}
-              >
-                {availableBrands.map((brand) => (
-                  <MenuItem key={brand._id} value={brand._id}>
-                    {brand.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-          <Box sx={{ mb: 2 }}>
-            <FormControl fullWidth>
-              <InputLabel id='category'>Category</InputLabel>
-              <Select
+                error={error}
+                label='Name'
+                name='name'
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                sx={{ width: 600 }}
+                multiline
                 size='small'
-                labelId='category'
-                value={formData.category}
-                label='category'
-                name='category'
+                type='text'
+                value={formData.description}
                 onChange={handleChange}
-              >
-                {availableCategories.map((category) => (
-                  <MenuItem key={category._id} value={category._id}>
-                    {category.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-          <Button type='submit'>Edit Product</Button>
-        </form>
+                error={error}
+                label='Description'
+                name='description'
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                sx={{ width: 600 }}
+                size='small'
+                type='text'
+                value={formData.image}
+                onChange={handleChange}
+                error={error}
+                label='Image'
+                name='image'
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <FormControl fullWidth>
+                <InputLabel id='brand'>Brand</InputLabel>
+                <Select
+                  size='small'
+                  labelId='brand'
+                  value={formData.brand}
+                  selected={formData.brand.name}
+                  label='Brand'
+                  name='brand'
+                  onChange={handleChange}
+                >
+                  {availableBrands.map((brand) => (
+                    <MenuItem key={brand._id} value={brand._id}>
+                      {brand.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <FormControl fullWidth>
+                <InputLabel id='category'>Category</InputLabel>
+                <Select
+                  size='small'
+                  labelId='category'
+                  value={formData.category}
+                  label='category'
+                  name='category'
+                  onChange={handleChange}
+                >
+                  {availableCategories.map((category) => (
+                    <MenuItem key={category._id} value={category._id}>
+                      {category.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+            <Button type='submit'>Edit Product</Button>
+          </form>
+        </Box>
       </Container>
-    </>
+    </Box>
   );
 }
 
