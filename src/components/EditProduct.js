@@ -16,6 +16,7 @@ import { API } from '../lib/api';
 
 export default function EditProduct() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -24,8 +25,18 @@ export default function EditProduct() {
     brand: ''
   });
   const [error, setError] = useState(false);
+  const [existingProductInfo, setExistingProductInfo] = useState([]);
   const [availableBrands, setAvailableBrands] = useState([]);
   const [availableCategories, setAvailableCategories] = useState([]);
+
+  useEffect(() => {
+    API.GET(API.ENDPOINTS.getSingleProduct(id))
+      .then(({ data }) => {
+        setExistingProductInfo(data);
+        console.log('EXISTING PROD INFO', existingProductInfo);
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.allBrands)
