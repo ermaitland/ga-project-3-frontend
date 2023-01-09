@@ -16,13 +16,15 @@ import UserIndex from './components/UserIndex';
 import User from './components/User';
 import CreateProduct from './components/ CreateProduct';
 import ReviewProduct from './components/ReviewProduct';
-import CreateCategory from './components/CreateCategory';
+import EditCategory from './components/EditCategory';
+import ResponsiveAppBar from './components/ResponsiveAppBar';
 
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
 function App() {
   return (
     <Router>
+      <ResponsiveAppBar />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -34,7 +36,7 @@ function App() {
         <Route path='/profile/:userId' element={<User />} />
         <Route path='/users' element={<UserIndex />} />
         <Route path='/brands' element={<GetAllBrands />} />
-        <Route path='/categories/create' element={<CreateCategory />} />
+        <Route path='/categories/edit' element={<EditCategory />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
       </Routes>
