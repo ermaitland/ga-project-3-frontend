@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { API } from '../lib/api';
 import { useAuthenticated } from '../hook/useAuthenticated';
+import '../styles/Product.scss';
 
 import ProductRating from './common/ProductRating';
 import {
@@ -20,12 +21,10 @@ import ReviewCard from './common/ReviewCard';
 import { AUTH } from '../lib/auth';
 
 export default function Product() {
-  // const navigate = useNavigate();
   const [isUpdated, setIsUpdated] = useState(false);
   const [singleProduct, setSingleProduct] = useState(null);
   const { id } = useParams();
   const [isLoggedIn] = useAuthenticated();
-  const navigate = useNavigate();
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.getSingleProduct(id))
@@ -51,14 +50,11 @@ export default function Product() {
   let isNumberOfReviewsOne = numberOfReviews === 1;
 
   return (
-    <>
-      <div>
-        <h1>this is the product page</h1>
-      </div>
+    <section className='Product'>
       <Container maxWidth='lg' sx={{ display: 'flex' }} className='Product'>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
-            <Box>
+            <Box sx={{ objectFit: 'contain' }}>
               <img src={singleProduct.image} alt={singleProduct.name} />
             </Box>
           </Grid>
@@ -157,6 +153,6 @@ export default function Product() {
           </Box>
         </Container>
       )}
-    </>
+    </section>
   );
 }

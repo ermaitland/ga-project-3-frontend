@@ -13,6 +13,7 @@ import {
   Typography
 } from '@mui/material';
 import { API } from '../lib/api';
+import '../styles/ProductIndex.scss';
 
 export default function CreateProduct() {
   const navigate = useNavigate();
@@ -71,8 +72,12 @@ export default function CreateProduct() {
   };
 
   return (
-    <>
-      <Typography variant='h2' component='p'>
+    <section className='createProduct'>
+      <Typography
+        variant='h4'
+        component='p'
+        sx={{ textAlign: 'center', pt: '40px' }}
+      >
         Create a Product
       </Typography>
       <Container
@@ -154,7 +159,7 @@ export default function CreateProduct() {
           <Button type='submit'>ADD MY PRODUCT</Button>
         </form>
       </Container>
-    </>
+    </section>
   );
 }
 
