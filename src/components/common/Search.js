@@ -4,8 +4,7 @@ import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 
 import { useState, useEffect } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { API } from '../../lib/api';
 
 export default function Search() {
@@ -14,7 +13,6 @@ export default function Search() {
   const [query, setQuery] = useState('');
 
   const navigate = useNavigate();
-  const [productOption, setProductOption] = useState();
   // const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -38,15 +36,15 @@ export default function Search() {
   // console.log('Product Data from Search2', products);
   // console.log('Filtered Product Data from Search2', filteredProducts);
 
-  useEffect(() => {
-    const clearup = () => {
-      // setIsOpen(false);
-      setQuery('');
-      setFilteredProducts([]);
-    };
+  // useEffect(() => {
+  //   const clearup = () => {
+  //     // setIsOpen(false);
+  //     setQuery('');
+  //     setFilteredProducts([]);
+  //   };
 
-    return clearup;
-  }, []);
+  //   return clearup;
+  // }, []);
 
   return (
     <Stack spacing={2} sx={{ width: 600 }}>
