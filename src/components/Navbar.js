@@ -2,6 +2,7 @@ import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthenticated } from '../hook/useAuthenticated';
 import { AUTH } from '../lib/auth';
+import '../styles/NavBar.scss';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -16,13 +17,13 @@ export default function Navbar() {
   return (
     <Box sx={{ flexgrow: 1 }}>
       <AppBar position='static'>
-        <Toolbar variant='dense'>
+        <Toolbar variant='dense' className='Navbar'>
           <Link to='/'>
             <Typography
               variant='h6'
               color='inherit'
               component='div'
-              sx={{ mr: 2 }}
+              sx={{ mr: 2, color: 'black' }}
             >
               Home
             </Typography>
@@ -32,7 +33,7 @@ export default function Navbar() {
               variant='h6'
               color='inherit'
               component='div'
-              sx={{ mr: 2 }}
+              sx={{ mr: 2, color: 'black' }}
             >
               Products
             </Typography>
@@ -42,7 +43,7 @@ export default function Navbar() {
               variant='h6'
               color='inherit'
               component='div'
-              sx={{ mr: 2 }}
+              sx={{ mr: 2, color: 'black' }}
             >
               Vegan Brands
             </Typography>
@@ -50,22 +51,12 @@ export default function Navbar() {
 
           {isLoggedIn ? (
             <>
-              <Link to='/' onClick={logout}>
-                <Typography
-                  variant='h6'
-                  color='inherit'
-                  component='div'
-                  sx={{ mr: 2 }}
-                >
-                  Logout
-                </Typography>
-              </Link>
               <Link to='/users'>
                 <Typography
                   variant='h6'
                   color='inherit'
                   component='div'
-                  sx={{ mr: 2 }}
+                  sx={{ mr: 2, color: 'black' }}
                 >
                   Users
                 </Typography>
@@ -75,7 +66,7 @@ export default function Navbar() {
                   variant='h6'
                   color='inherit'
                   component='div'
-                  sx={{ mr: 2 }}
+                  sx={{ mr: 2, color: 'black' }}
                 >
                   Add Product
                 </Typography>
@@ -85,9 +76,19 @@ export default function Navbar() {
                   variant='h6'
                   color='inherit'
                   component='div'
-                  sx={{ mr: 2 }}
+                  sx={{ mr: 2, color: 'black' }}
                 >
                   Edit Product
+                </Typography>
+              </Link>
+              <Link to='/' onClick={logout}>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  component='div'
+                  sx={{ mr: 2, color: 'black' }}
+                >
+                  Logout
                 </Typography>
               </Link>
             </>
@@ -98,7 +99,7 @@ export default function Navbar() {
                   variant='h6'
                   color='inherit'
                   component='div'
-                  sx={{ mr: 2 }}
+                  sx={{ mr: 2, color: 'black' }}
                 >
                   Register
                 </Typography>
@@ -108,7 +109,7 @@ export default function Navbar() {
                   variant='h6'
                   color='inherit'
                   component='div'
-                  sx={{ mr: 2 }}
+                  sx={{ mr: 2, color: 'black' }}
                 >
                   Login
                 </Typography>
@@ -121,7 +122,7 @@ export default function Navbar() {
                 variant='h6'
                 color='inherit'
                 component='div'
-                sx={{ mr: 2 }}
+                sx={{ mr: 2, color: 'black' }}
               >
                 Edit Categories
               </Typography>

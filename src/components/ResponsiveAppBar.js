@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import '../styles/NavBar.scss';
 
 import { useState } from 'react';
 import Search from './common/Search';
@@ -39,10 +40,12 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position='static'>
+    <AppBar
+      position='static'
+      sx={{ backgroundColor: 'rgb(249, 230, 246)', color: 'black' }}
+    >
       <Container maxWidth='lg'>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant='h6'
             noWrap
@@ -58,7 +61,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none'
             }}
           >
-            LOGO
+            Tazty Alternativez
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
