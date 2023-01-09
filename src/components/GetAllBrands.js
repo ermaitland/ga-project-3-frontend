@@ -11,7 +11,7 @@ import {
   Button
 } from '@mui/material';
 import { useAuthenticated } from '../hook/useAuthenticated';
-import './styles/App.css';
+import '../styles/App.css';
 
 export default function GetAllBrandsIndex() {
   const [brands, setBrands] = useState(null);

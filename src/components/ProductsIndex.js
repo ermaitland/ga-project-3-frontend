@@ -30,10 +30,6 @@ export default function ProductsIndex() {
 
   return (
     <Container maxwith='lg' sx={{ display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3, mt: 3 }}>
-        <Search />
-      </Box>
-
       <Container
         maxwith='lg'
         sx={{ display: 'flex', justifyContent: 'space-around' }}
